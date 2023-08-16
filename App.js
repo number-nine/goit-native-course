@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import PasswordField from './components/Elements/InputFields/PasswordField/PasswordField';
+import LoginForm from './components/Elements/RegisterForm/RegisterForm';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <PasswordField />
+      <LoginForm />
       <StatusBar style="auto" />
     </View>
   );
@@ -16,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'tomato',
     alignItems: 'center',
     justifyContent: 'center',
   },
