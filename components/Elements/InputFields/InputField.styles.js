@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const inputFieldStyles = StyleSheet.create({
   input: {
-    width: "100%",
+    width: '100%',
     height: 50,
     padding: 16,
 
