@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "react-native";
+import { Pressable, Text } from "react-native";
 
 import ButtonWrapperStyles from "./ButtonWrapper.style";
 
-export default ButtonWrapper = (props) => {
+export default ButtonWrapper = ({title, ...transitProps }) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  return <Button {...props} style={[ButtonWrapperStyles.wrapper]} />;
+  return (
+    <Pressable {...transitProps} style={[ButtonWrapperStyles.wrapper]}>
+      <Text>{title}</Text>
+    </Pressable>
+  );
 };
