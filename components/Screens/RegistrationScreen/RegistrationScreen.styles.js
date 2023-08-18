@@ -3,8 +3,11 @@ import { StyleSheet } from "react-native";
 const RegistrationScreenStyles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    flexDirection: "column",
+    // justifyContent: "start",
+    alignItems: "center",
     rowGap: 16,
-    // position:"relative",
+    position:"relative",
     width: "100%",
     marginTop: "40%",
 

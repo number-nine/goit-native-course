@@ -5,7 +5,7 @@ import registrationScreenStyles from "./RegistrationScreen.styles";
 import InputField from "../../Elements/InputField/InputField";
 import PasswordField from "../../Elements/PasswordField/PasswordField";
 import AvatarHolder from "../../Elements/AvatarHolder/AvatarHolder";
-import ButtonWrapper from "../../Elements/ButtonWrapper/ButtonWrapper";
+import OrangeButton from "../../Elements/OrangeButton/OrangeButton";
 
 import { View } from "react-native";
 
@@ -17,7 +17,7 @@ export default RegistrationScreen = () => {
       <InputField placeholder="Логін" />
       <InputField placeholder="Адреса електронної пошти" />
       <PasswordField />
-      <ButtonWrapper title="hhhh"/>
+      <OrangeButton title="Зареєструватися" />
     </View>
   );
 };

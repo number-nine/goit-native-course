@@ -1,17 +1,23 @@
 import { StyleSheet } from "react-native";
 
-const ButtonWrapperStyles = StyleSheet.create({
+const OrangeButtonStyles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    // flex: 1,
+    display:"flex",
+
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    maxHeight: 50,
+    height: 50,
     borderRadius: 100,
     borderWidth: 1,
     borderColor: "#FF6C00",
     backgroundColor: "#FF6C00",
   },
+  label: {
+    color: "#ffffff",
+    
+  },
 });
 
-export default ButtonWrapperStyles;
+export default OrangeButtonStyles;
