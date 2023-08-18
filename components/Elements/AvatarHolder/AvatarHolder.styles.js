@@ -17,7 +17,7 @@ const AvatarHolderStyles = StyleSheet.create({
     height: 25,
     backgroundColor: "#ffffff",
     borderWidth: 1,
-    borderColor: "#FF6C00",
+    borderColor: "transparent",
     borderRadius: 12,
   },
   tinyLogo: {
