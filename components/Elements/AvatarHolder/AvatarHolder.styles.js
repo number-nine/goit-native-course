@@ -20,10 +20,6 @@ const AvatarHolderStyles = StyleSheet.create({
     borderColor: "transparent",
     borderRadius: 12,
   },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-  },
 });
 
 export default AvatarHolderStyles;
