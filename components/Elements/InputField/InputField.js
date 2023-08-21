@@ -3,8 +3,12 @@ import { TextInput } from "react-native";
 
 import inputFieldStyles from "./InputField.styles";
 
-export default InputField = (props) => {
+export default ({onChange, ...props}) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  const handleOnchange = (text) => {
+    onChange({ type: props.name, payload: text })
+  } 
 
   return (
     <TextInput
@@ -15,6 +19,7 @@ export default InputField = (props) => {
       ]}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
+      onChangeText={handleOnchange}
     />
   );
 };

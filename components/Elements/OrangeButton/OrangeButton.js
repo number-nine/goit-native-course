@@ -3,10 +3,10 @@ import { Pressable, Text } from "react-native";
 
 import orangeButtonStyles from "./OrangeButton.style";
 
-export default OrangeButton = ({ title, ...transitProps }) => {
+export default ({ title, ...props }) => {
 
   return (
-    <Pressable {...transitProps} style={orangeButtonStyles.wrapper}>
+    <Pressable {...props} style={[orangeButtonStyles.wrapper, props.style]}>
       <Text style={orangeButtonStyles.label}>{title}</Text>
     </Pressable>
   );

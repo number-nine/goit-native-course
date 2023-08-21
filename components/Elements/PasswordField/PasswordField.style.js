@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const passwordFieldStyles = StyleSheet.create({
   wrapper: {
     position: "relative",
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
     // borderWidth: 1,
   },

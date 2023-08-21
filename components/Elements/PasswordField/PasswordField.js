@@ -5,7 +5,7 @@ import passwordFieldStyles from "./PasswordField.style";
 
 import InputField from "../InputField/InputField";
 
-export default PasswordField = () => {
+export default (props) => {
   const [secureField, setSecureField] = useState(true);
 
   const handlePressIn = () => {
@@ -19,6 +19,7 @@ export default PasswordField = () => {
   return (
     <View style={passwordFieldStyles.wrapper}>
       <InputField
+        {...props}
         placeholder="Пароль"
         textContentType="password"
         secureTextEntry={secureField}

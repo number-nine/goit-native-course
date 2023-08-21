@@ -3,11 +3,12 @@ import { StyleSheet, View } from 'react-native';
 
 
 import RegistrationScreen from './components/Screens/RegistrationScreen/RegistrationScreen';
+import LoginScreen from './components/Screens/LoginScreen/LoginScreen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <RegistrationScreen />
+      <LoginScreen />
 
       <StatusBar style="auto" />
     </View>
@@ -17,8 +18,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'tomato',
+    // backgroundColor: 'tomato',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
 });

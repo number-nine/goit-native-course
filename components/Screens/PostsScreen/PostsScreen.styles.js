@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const RegistrationScreenStyles = StyleSheet.create({
+const PostsScreenStyles = StyleSheet.create({
   wrapper: {
     flexDirection: "column",
     alignItems: "center",
@@ -34,4 +34,4 @@ const RegistrationScreenStyles = StyleSheet.create({
   },
 });
 
-export default RegistrationScreenStyles;
+export default PostsScreen;

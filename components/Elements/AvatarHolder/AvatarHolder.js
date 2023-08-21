@@ -4,7 +4,7 @@ import Svg, { Line, Circle, G } from "react-native-svg";
 
 import AvatarHolderStyles from "./AvatarHolder.styles";
 
-export default AvatarHolder = (props) => {
+export default (props) => {
   const [avatarSelector, setAvatarSelector] = useState(true);
 
   const handlePressIn = () => {

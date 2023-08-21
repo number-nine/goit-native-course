@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
 
-import registrationScreenStyles from "./RegistrationScreen.styles";
+import loginScreenStyles from "./LoginScreen.styles";
 import InputField from "../../Elements/InputField/InputField";
 import PasswordField from "../../Elements/PasswordField/PasswordField";
 import AvatarHolder from "../../Elements/AvatarHolder/AvatarHolder";
@@ -18,11 +18,11 @@ function reducer (state, action) {
 
 export default () => {
   const properties = {
-    title: "Реєстрація",
+    title: "Увійти",
     namePlaceholder: "Ім'я",
     emailPlaceholder: "Адреса електронної пошти",
-    actionTitle: "Зареєструватися",
-    switchAction: ["Вже є акаунт? ", "Увійти"],
+    actionTitle: "Увійти",
+    switchAction: ["Немає акаунту? ", "Зареєструватися"],
   };
 
   const [state, dispatch] = useReducer(reducer, {name: '', email: '', password:''})
@@ -31,19 +31,13 @@ export default () => {
     <ImageBackground
       source={BackgroundSource}
       resizeMode="cover"
-      style={registrationScreenStyles.back}
+      style={loginScreenStyles.back}
     >
-      <View style={registrationScreenStyles.wrapper}>
-        <AvatarHolder style={registrationScreenStyles.avatar} />
+      <View style={loginScreenStyles.wrapper}>
+        <AvatarHolder style={loginScreenStyles.avatar} />
         <Title style={{ fontSize: 30, fontWeight: 500 }}>
           {properties.title}
         </Title>
-        <InputField
-          onChange={dispatch}
-          placeholder={properties.namePlaceholder}
-          value={state.name}
-          name="name"
-        />
         <InputField
           onChange={dispatch}
           placeholder={properties.emailPlaceholder}
@@ -56,7 +50,7 @@ export default () => {
           name="password"
         />
         <OrangeButton
-          style={registrationScreenStyles.button}
+          style={loginScreenStyles.button}
           title={properties.actionTitle}
         />
         <CredentialsLink
