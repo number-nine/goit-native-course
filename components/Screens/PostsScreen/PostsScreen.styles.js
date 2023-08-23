@@ -17,21 +17,27 @@ const PostsScreenStyles = StyleSheet.create({
 
     borderTopStartRadius: 25,
     borderTopEndRadius: 25,
-  },
-  avatar: {
-    position: "absolute",
-    top: -60,
-    left: "50%",
-    marginLeft: -44,
-  },
+    },
+    headerWrapper: {
+
+        alignItems:"center",
+        width: "100%",
+        borderBottomColor: "rgba(33, 33, 33, 0.3)",
+        borderBottomWidth: 1,
+        paddingBottom: 11,
+        paddingTop:55,
+        
+    },
+    screenWrapper: {
+        width: "100%",
+        flex: 1,
+        justifyContent:"space-between"
+    },
+
   button: {
     marginTop: 27,
   },
-  back: {
-    width: "100%",
-    flex: 1,
-    justifyContent: "flex-end",
-  },
+ 
 });
 
-export default PostsScreen;
+export default PostsScreenStyles;

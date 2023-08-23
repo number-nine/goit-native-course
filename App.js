@@ -4,11 +4,12 @@ import { StyleSheet, View } from 'react-native';
 
 import RegistrationScreen from './components/Screens/RegistrationScreen/RegistrationScreen';
 import LoginScreen from './components/Screens/LoginScreen/LoginScreen';
+import PostsScreen from './components/Screens/PostsScreen/PostsScreen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <LoginScreen />
+      <PostsScreen />
 
       <StatusBar style="auto" />
     </View>
