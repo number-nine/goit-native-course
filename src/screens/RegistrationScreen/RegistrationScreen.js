@@ -2,17 +2,16 @@ import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
 
 import registrationScreenStyles from "./registrationScreen.styles";
-import InputField from "../../Elements/InputField/InputField";
-import PasswordField from "../../Elements/PasswordField/PasswordField";
-import AvatarHolder from "../../Elements/AvatarHolder/AvatarHolder";
-import OrangeButton from "../../Elements/OrangeButton/OrangeButton";
-import CredentialsLink from "../../Elements/CredentialsLink/CredentialsLink";
-import Title from "../../Elements/Title/Title";
+import InputField from "../../components/InputField/InputField";
+import PasswordField from "../../components/PasswordField/PasswordField";
+import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
+import OrangeButton from "../../components/OrangeButton/OrangeButton";
+import CredentialsLink from "../../components/CredentialsLink/CredentialsLink";
+import Title from "../../components/Title/Title";
 
-import BackgroundSource from "../../../images/credentials-bg.jpg";
+import BackgroundSource from "../../images/credentials-bg.jpg";
 
 function reducer(state, action) {
-  // console.log(state);
   return { ...state, [action.type]: action.payload };
 }
 

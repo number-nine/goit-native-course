@@ -1,8 +1,8 @@
 import React from "react";
 import {View, Pressable} from "react-native";
 
-import OrangeButton from "../../Elements/OrangeButton/OrangeButton";
-import Plus from "../../../images/plus.svg";
+import OrangeButton from "../../components/OrangeButton/OrangeButton";
+import Plus from "../../images/plus.svg";
 import postsFooterStyles from "./postsFooter.styles";
 
 export default ({ leftControl, rightControl }) => {

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Pressable, View } from "react-native";
 
 import avatarHolderStyles from "./avatarHolder.styles";
-import Plus from "../../../images/plus.svg";
-import Cross from "../../../images/cross.svg";
+import Plus from "../../images/plus.svg";
+import Cross from "../../images/cross.svg";
 
 export default (props) => {
   const [avatarSelector, setAvatarSelector] = useState(true);

@@ -3,7 +3,7 @@ import { Pressable, View } from "react-native";
 
 import mainHeaderStyles from "./mainHeader.styles";
 
-import Title from "../../Elements/Title/Title";
+import Title from "../../components/Title/Title";
 
 
 export default ({ leftControl, rightControl, title}) => {

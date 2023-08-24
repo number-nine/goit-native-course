@@ -3,13 +3,13 @@ import { View, ScrollView } from "react-native";
 
 import postsScreenStyles from "./postsScreen.styles";
 
-import MainHeader from "../../components/Elements/MainHeader/MainHeader";
-import ProfileBadge from "../../components/Elements/ProfileBadge/ProfileBadge";
-import PostsFooter from "../../components/Elements/PostsFooter/PostsFooter";
+import MainHeader from "../../components/MainHeader/MainHeader";
+import ProfileBadge from "../../components/ProfileBadge/ProfileBadge";
+import PostsFooter from "../../components/PostsFooter/PostsFooter";
 
-import Grid from "../../../images/grid.svg";
-import User from "../../../images/user.svg";
-import LogOut from "../../../images/log-out.svg";
+import Grid from "../../images/grid.svg";
+import User from "../../images/user.svg";
+import LogOut from "../../images/log-out.svg";
 
 export default () => {
   return (
