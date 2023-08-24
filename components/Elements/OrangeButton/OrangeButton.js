@@ -3,13 +3,12 @@ import { Pressable, Text } from "react-native";
 
 import orangeButtonStyles from "./OrangeButton.style";
 
-export default ({ title, ...props }) => {
-  if (typeof title === "string") {
-    console.log("hello");
-  }
+export default ({ label, ...props }) => {
+  const isText = typeof title === "string";
   return (
     <Pressable {...props} style={[orangeButtonStyles.wrapper, props.style]}>
-      <Text style={orangeButtonStyles.label}>{title}</Text>
+      {isText && <Text style={orangeButtonStyles.label}>{label}</Text>}
+      {!isText && label}
     </Pressable>
   );
 };

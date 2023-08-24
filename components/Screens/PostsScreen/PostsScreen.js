@@ -6,6 +6,7 @@ import postsScreenStyles from "./PostsScreen.styles";
 import OrangeButton from "../../Elements/OrangeButton/OrangeButton";
 import Title from "../../Elements/Title/Title";
 import ProfileBadge from "../../Elements/ProfileBadge/ProfileBadge";
+import Pin from '../../../images/map-pin.svg'
 
 
 export default () => {
@@ -27,7 +28,7 @@ export default () => {
         <ProfileBadge />
         <OrangeButton
           style={postsScreenStyles.button}
-          title={properties.actionTitle}
+          label={<Pin stroke='#ff0000'/>}
         />
       </View>
     </View>
