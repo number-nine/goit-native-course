@@ -5,11 +5,12 @@ import {registerRootComponent} from 'expo';
 import RegistrationScreen from "./screens/RegistrationScreen/RegistrationScreen";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import PostsScreen from "./screens/PostsScreen/PostsScreen";
+import CreatePostsScreen from "./screens/CreatePostsScreen/CreatePostsScreen";
 
  function App() {
   return (
     <View style={styles.container}>
-      <RegistrationScreen />
+      <CreatePostsScreen />
 
       <StatusBar style="auto" />
     </View>
