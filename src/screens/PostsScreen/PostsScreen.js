@@ -5,6 +5,7 @@ import postsScreenStyles from "./postsScreen.styles";
 
 import MainHeader from "../../components/MainHeader/MainHeader";
 import ProfileBadge from "../../components/ProfileBadge/ProfileBadge";
+import PostCard from "../../components/PostCard/PostCard";
 import PostsFooter from "../../components/PostsFooter/PostsFooter";
 
 import Grid from "../../images/grid.svg";
@@ -20,6 +21,10 @@ export default () => {
       />
       <ScrollView style={postsScreenStyles.main}>
         <ProfileBadge style={{ marginTop: 32 }} />
+        <View style={postsScreenStyles.postsContainer}>
+          <PostCard />
+          <PostCard />
+        </View>
       </ScrollView>
 
       <PostsFooter leftControl={<Grid />} rightControl={<User />} />

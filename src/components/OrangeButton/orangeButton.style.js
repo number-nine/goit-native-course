@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
 
-const OrangeButtonStyles = StyleSheet.create({
+export default StyleSheet.create({
   wrapper: {
-    // flex: 1,
-    display:"flex",
+    display: "flex",
 
     justifyContent: "center",
     alignItems: "center",
@@ -16,8 +15,6 @@ const OrangeButtonStyles = StyleSheet.create({
   },
   label: {
     color: "#ffffff",
-    
   },
 });
 
-export default OrangeButtonStyles;

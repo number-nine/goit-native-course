@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const AvatarHolderStyles = StyleSheet.create({
+export default StyleSheet.create({
   wrapper: {
     position: "relative",
     width: 120,
@@ -23,4 +23,3 @@ const AvatarHolderStyles = StyleSheet.create({
   },
 });
 
-export default AvatarHolderStyles;

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const profileBadgeStyles = StyleSheet.create({
+export default StyleSheet.create({
   wrapper: {
     width: 171,
     height: 60,
@@ -26,5 +26,3 @@ const profileBadgeStyles = StyleSheet.create({
     color: "rgba(33, 33, 33, 0.8)",
   },
 });
-
-export default profileBadgeStyles;

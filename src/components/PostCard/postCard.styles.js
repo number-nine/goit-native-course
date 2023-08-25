@@ -2,25 +2,24 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   wrapper: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
     width: "100%",
-    paddingBottom: 34,
-    paddingTop: 9,
-
-    borderTopColor: "rgba(33, 33, 33, 0.3)",
-    borderTopWidth: 1,
+    rowGap: 8,
+  },
+  photo: {
+    width: "100%",
+  },
+  title: { fontSize: 16, fontWeight: 500 },
+  details: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
-  button: {
-    width: 70,
-    height: 40,
-    borderRadius: 20,
+  detailsItem: {
+    flexDirection: "row",
+    columnGap: 4,
   },
-  controlWrapper: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 40,
+  detailsCaption: {
+    color: "#212121",
+    fontSize: 16,
   },
 });

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const passwordFieldStyles = StyleSheet.create({
+export default StyleSheet.create({
   wrapper: {
     position: "relative",
     flexDirection: "row",
@@ -18,5 +18,3 @@ const passwordFieldStyles = StyleSheet.create({
   },
   input: {},
 });
-
-export default passwordFieldStyles;
