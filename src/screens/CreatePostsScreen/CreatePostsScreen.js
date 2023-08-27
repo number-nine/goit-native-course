@@ -13,26 +13,34 @@ import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import Arrow from "../../images/arrow-left.svg";
 import MapPin from "../../images/map-pin.svg";
 
-function reducer(state, action) {
-  return { ...state, [action.type]: action.payload };
-}
-
 export default () => {
-  const [disabled, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true);
+  
+  function reducer(state, action) {
+    const newState = { ...state, [action.type]: action.payload }
+    if (newState.title && newState.location) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+    return newState;
+  }
+  
+
   const onLocationFocusAction = () => {
     console.log("Location selection action -> opening google maps");
   };
 
   const [state, dispatch] = useReducer(reducer, {
-    photo: require('../../images/photo-mock.jpg'),
+    photo: require("../../images/photo-mock.jpg"),
     title: "",
     location: "",
   });
 
   const handleSubmit = () => {
-    if (disabled) return
+    if (disabled) return;
     console.log(state);
-  }
+  };
 
   return (
     <View style={createScreenStyles.wrapper}>
