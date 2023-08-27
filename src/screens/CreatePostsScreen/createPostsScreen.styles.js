@@ -29,31 +29,18 @@ export default StyleSheet.create({
     left: "50%",
     transform: [{ translateX: -30 }, { translateY: -30 }],
   },
-  title: {
+  caption: {
     marginTop: 8,
     fontSize: 16,
     color: "#bdbdbd",
   },
-  inputTitle: {
-    paddingLeft: 0,
-    backgroundColor: "transparent",
-    borderWidth: 0,
-    borderRadius: 0,
-    borderBottomWidth: 1,
-    fontSize: 16,
+  title: {
+    marginTop: 32,
   },
-  inputLocation: {
-    backgroundColor: "transparent",
-    borderWidth: 0,
-    borderRadius: 0,
-    borderBottomWidth: 1,
-    borderColor: "#e8e8e8",
-    fontSize: 16,
+  location: {
+    marginTop: 16,
   },
-  locationLabel: {
-    width:"100%",
-    flexDirection: "row",
-    columnGap: 4,
-    justifyContent: "flex-start",
- }
+  button: {
+    marginTop: 32,
+  },
 });

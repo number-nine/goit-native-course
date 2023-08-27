@@ -1,55 +1,77 @@
-import React from "react";
+import React, { useReducer, useState } from "react";
 import { View, ScrollView, Image, Text } from "react-native";
 
 import createScreenStyles from "./createPostsScreen.styles";
 
 import MainHeader from "../../components/MainHeader/MainHeader";
 import PhotoButton from "../../components/PhotoButton/PhotoButton";
-import PostsFooter from "../../components/PostsFooter/PostsFooter";
-import Title from "../../components/Title/Title";
-import InputField from "../../components/InputField/InputField";
+import EditorFooter from "../../components/EditorFooter/EditorFooter";
+
+import MinimalisticInputField from "../../components/MinimalisticInputField/MinimalisticInputField";
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
 
-import Grid from "../../images/grid.svg";
-import User from "../../images/user.svg";
 import Arrow from "../../images/arrow-left.svg";
 import MapPin from "../../images/map-pin.svg";
 
+function reducer(state, action) {
+  return { ...state, [action.type]: action.payload };
+}
+
 export default () => {
+  const [disabled, setDisabled] = useState(true)
+  const onLocationFocusAction = () => {
+    console.log("Location selection action -> opening google maps");
+  };
+
+  const [state, dispatch] = useReducer(reducer, {
+    photo: require('../../images/photo-mock.jpg'),
+    title: "",
+    location: "",
+  });
+
+  const handleSubmit = () => {
+    if (disabled) return
+    console.log(state);
+  }
+
   return (
     <View style={createScreenStyles.wrapper}>
       <MainHeader title={"Створити публікацію"} leftControl={<Arrow />} />
       <ScrollView style={createScreenStyles.main}>
         <View style={createScreenStyles.photoWrapper}>
-          <Image style={createScreenStyles.photo}></Image>
-          <PhotoButton style={createScreenStyles.photoButton} />
+          <Image style={createScreenStyles.photo} source={state.photo}></Image>
+          <PhotoButton
+            style={createScreenStyles.photoButton}
+            onPress={dispatch}
+            name="photo"
+          />
         </View>
-        <Title style={createScreenStyles.title}>{"Завантажте фото"}</Title>
-        <InputField
-          placeholder="Назва..."
-          style={createScreenStyles.inputTitle}
+        <Text style={createScreenStyles.caption}>{"Завантажте фото"}</Text>
+        <MinimalisticInputField
+          placeholder={"Назва..."}
+          style={createScreenStyles.title}
+          value={state.title}
+          onChange={dispatch}
+          name="title"
+        />
+        <MinimalisticInputField
+          placeholder={"Місцевість..."}
+          onFocusAction={onLocationFocusAction}
+          icon={<MapPin />}
+          style={createScreenStyles.location}
+          value={state.location}
+          onChange={dispatch}
+          name="location"
         />
         <OrangeButton
-          label={
-            <View style={createScreenStyles.locationLabel}>
-              <MapPin />
-              <Text>Місцевість...</Text>
-            </View>
-          }
-          style={createScreenStyles.inputLocation}
+          label={"Опублікувати"}
+          style={createScreenStyles.button}
+          disabled={disabled}
+          onPress={handleSubmit}
         />
-        {/* <View style={createScreenStyles.details}>
-          <View style={createScreenStyles.detailsItem}></View>
-          <View style={createScreenStyles.detailsItem}>
-            <MapPin />
-            <Text style={createScreenStyles.detailsCaption}>
-              {"Ivano-Frankivs'k Region, Ukraine"}
-            </Text>
-          </View>
-        </View> */}
       </ScrollView>
 
-      <PostsFooter leftControl={<Grid />} rightControl={<User />} />
+      <EditorFooter />
     </View>
   );
 };
