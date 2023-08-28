@@ -5,19 +5,30 @@ import orangeButtonStyles from "./orangeButton.style";
 
 export default ({ label, disabled, ...props }) => {
   const isText = typeof label === "string";
-  if (disabled) {
-    orangeButtonStyles.wrapper = {
-      ...orangeButtonStyles.wrapper,
-      ...orangeButtonStyles.disabled,
-    };
-    orangeButtonStyles.label = {
-      ...orangeButtonStyles.label,
-      color: '#bdbdbd',
-    };
-  }
+
   return (
-    <Pressable {...props} style={[orangeButtonStyles.wrapper, props.style]}>
-      {isText && <Text style={orangeButtonStyles.label}>{label}</Text>}
+    <Pressable
+      {...props}
+      style={[
+        orangeButtonStyles.wrapper,
+        disabled
+          ? { borderWidth: 0, backgroundColor: "#F6F6F6" }
+          : { borderColor: "#FF6C00", backgroundColor: "#FF6C00" },
+        props.style,
+      ]}
+    >
+      {isText && (
+        <Text
+          style={[
+            orangeButtonStyles.label,
+            disabled
+              ? { color: "#bdbdbd" }
+              : { color: "#ffffff" },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
       {!isText && label}
     </Pressable>
   );
