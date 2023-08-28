@@ -19,6 +19,7 @@ export default ({ onChange, onFocusAction, placeholder, ...props }) => {
 
   return (
     <TextInput
+      {...props}
       placeholder={placeholder}
       style={[
         inputFieldStyles.input,

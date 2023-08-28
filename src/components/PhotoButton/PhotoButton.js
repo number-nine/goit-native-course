@@ -9,7 +9,7 @@ import Camera from "../../images/camera.svg";
 
 export default (props) => {
   return (
-      <Pressable style={[photoButtonStyles.wrapper, props.style]}>
+    <Pressable {...props} style={[photoButtonStyles.wrapper, props.style]}>
           <Camera/>
     </Pressable>
   );

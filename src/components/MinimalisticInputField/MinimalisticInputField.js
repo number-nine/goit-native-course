@@ -7,15 +7,14 @@ import minimalisticInputStyles from "./minimalisticInputField.styles";
 
 
 export default ({ icon, ...props }) => {
-    if (icon) {
-        minimalisticInputStyles.input = {
-            ...minimalisticInputStyles.input,
-            paddingLeft: 28,
-        }
-
-}
     return (
-      <View style={[minimalisticInputStyles.wrapper, props.style]}>
+      <View
+        style={[
+          minimalisticInputStyles.wrapper,
+          props.style,
+          icon ? { paddingLeft: 28 } : { paddingLeft: 0 },
+        ]}
+      >
         <InputField {...props} style={minimalisticInputStyles.input} />
         {icon && <View style={minimalisticInputStyles.icon}>{icon}</View>}
       </View>

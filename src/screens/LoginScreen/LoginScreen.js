@@ -24,8 +24,16 @@ export default () => {
     switchAction: ["Немає акаунту? ", "Зареєструватися"],
   };
 
+  const handleSubmit = () => {
+    console.log('Logging in...');
+    console.log(state);
+  }
+
+  const handleChangeScreen = () => {
+    console.log('Navigating to registration screen...');
+  }
+
   const [state, dispatch] = useReducer(reducer, {
-    name: "",
     email: "",
     password: "",
   });
@@ -55,10 +63,12 @@ export default () => {
         <OrangeButton
           style={loginScreenStyles.button}
           label={properties.actionTitle}
+          onPress={handleSubmit}
         />
         <CredentialsLink
           label={properties.switchAction[0]}
           nestedLabel={properties.switchAction[1]}
+          onPress={handleChangeScreen}
         />
       </View>
     </ImageBackground>
