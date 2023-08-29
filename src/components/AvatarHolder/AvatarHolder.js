@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Pressable, View } from "react-native";
 
-import avatarHolderStyles from "./avatarHolder.styles";
+import styles from "./styles";
 import Plus from "../../images/plus.svg";
 import Cross from "../../images/cross.svg";
 
-export default (props) => {
+export default function AvatarHolder (props) {
   const [avatarSelector, setAvatarSelector] = useState(true);
   const [selectorColor, setSelectorColor] = useState("#FF6C00");
 
@@ -19,9 +19,9 @@ export default (props) => {
     setSelectorColor("#FF6C00");
   };
   return (
-    <View style={[avatarHolderStyles.wrapper, props.style]}>
+    <View style={[styles.wrapper, props.style]}>
       <Pressable
-        style={[avatarHolderStyles.button, { borderColor: selectorColor }]}
+        style={[styles.button, { borderColor: selectorColor }]}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
       >

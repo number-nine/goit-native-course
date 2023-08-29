@@ -7,6 +7,7 @@ export default StyleSheet.create({
     height: 120,
     borderRadius: 16,
     backgroundColor: "#F6F6F6",
+    overflow: "hidden",
   },
   button: {
     position: "absolute",
@@ -15,8 +16,8 @@ export default StyleSheet.create({
     flex: 1,
     width: 24,
     height: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#ffffff",
     borderWidth: 1,
     borderRadius: 12,

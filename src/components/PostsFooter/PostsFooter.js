@@ -5,7 +5,7 @@ import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import Plus from "../../images/plus.svg";
 import postsFooterStyles from "./postsFooter.styles";
 
-export default ({ leftControl, rightControl }) => {
+export default ({ leftControl, rightControl, centralControl=<Plus width={14} height={14} fill={"#ffffff"} /> }) => {
   return (
     <View style={postsFooterStyles.wrapper}>
       <Pressable
@@ -21,11 +21,9 @@ export default ({ leftControl, rightControl }) => {
 
       <OrangeButton
         style={postsFooterStyles.button}
-        label={<Plus width={14} height={14} fill={"#ffffff"} />}
+        label={centralControl}
         onPress={() => {
-          console.log(
-            "Navigate/PostEditorScreen"
-          );
+          console.log("Navigate/PostEditorScreen");
         }}
       />
       <Pressable

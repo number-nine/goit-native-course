@@ -7,12 +7,13 @@ import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import PostsScreen from "./screens/PostsScreen/PostsScreen";
 import CreatePostsScreen from "./screens/CreatePostsScreen/CreatePostsScreen";
 import CommentsScreen from "./screens/CommentsScreen/CommentsScreen";
+import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 
  function App() {
    return (
      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
        <View style={styles.container}>
-         <CommentsScreen />
+         <ProfileScreen />
 
          <StatusBar style="auto" />
        </View>

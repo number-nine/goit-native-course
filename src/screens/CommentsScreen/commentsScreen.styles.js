@@ -11,12 +11,15 @@ export default StyleSheet.create({
     marginTop: 32,
     paddingLeft: 16,
     paddingRight: 16,
-    rowGap: 100,
   },
   photo: {
     width: "100%",
     borderRadius: 8,
   },
-  list: {},
-  input: {},
+  list: {
+    marginTop: 32,
+  },
+  input: {
+    marginTop: 32,
+  },
 });

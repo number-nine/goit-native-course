@@ -1,7 +1,7 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 
-import postsScreenStyles from "./postsScreen.styles";
+import styles from "./styles";
 
 import MainHeader from "../../components/MainHeader/MainHeader";
 import ProfileBadge from "../../components/ProfileBadge/ProfileBadge";
@@ -14,20 +14,20 @@ import LogOut from "../../images/log-out.svg";
 
 export default () => {
   return (
-    <View style={postsScreenStyles.wrapper}>
+    <View style={styles.wrapper}>
       <MainHeader
         title={"Публікації"}
         rightControl={<LogOut width={24} height={24} />}
       />
-      <ScrollView style={postsScreenStyles.main}>
+      <ScrollView style={styles.main}>
         <ProfileBadge style={{ marginTop: 32 }} />
-        <View style={postsScreenStyles.postsContainer}>
+        <View style={styles.postsContainer}>
           <PostCard />
           <PostCard />
         </View>
       </ScrollView>
 
-      <PostsFooter leftControl={<Grid />} rightControl={<User />} />
+      <PostsFooter leftControl={<Grid />} rightControl={<User stroke="#212121"/>} />
     </View>
   );
 };
