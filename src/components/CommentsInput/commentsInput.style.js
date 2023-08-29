@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   wrapper: {
-    // position: "relative",
-    borderWidth: 1,
-    borderColor: "red",
+    position: "relative",
   },
   input: {
     height: 50,
@@ -12,14 +10,12 @@ export default StyleSheet.create({
   },
   buttonWrapper: {
     position: "absolute",
-    top: 200,
-    borderWidth: 1,
-    borderColor: "green",
-    // bottom: 0,
-    // left: 0,
+    top: 0,
+    bottom: 0,
+    right: 8,
+    justifyContent:'center',
   },
   button: {
-    // position: "absolute",
     height: 34,
     width: 34,
   },
