@@ -13,8 +13,13 @@ export default StyleSheet.create({
     borderColor: "#FF6C00",
     backgroundColor: "#FF6C00",
   },
+  disabled: {
+    borderWidth: 0,
+    backgroundColor: "#F6F6F6",
+  },
+
   label: {
     color: "#ffffff",
+    fontSize:16,
   },
 });
-
