@@ -21,7 +21,7 @@ import Plus from "../../images/plus.svg";
 import Grid from "../../images/grid.svg";
 import Logout from '../../images/log-out.svg';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
   return (
     <ScreenLayout>
       <ImageBackground
@@ -31,7 +31,10 @@ export default function ProfileScreen() {
       >
         <View style={styles.wrapper}>
           <AvatarHolder style={styles.avatar} />
-          <Pressable style={styles.logout}>
+          <Pressable
+            style={styles.logout}
+            onPress={()=>navigation.navigate("Login")}
+          >
             <Logout />
           </Pressable>
           <Text style={[styles.author, { fontWeight: 500 }]}>
@@ -45,9 +48,18 @@ export default function ProfileScreen() {
             </View>
           </ScrollView>
           <PostsFooter
-            leftControl={<Grid />}
-            centralControl={<User />}
-            rightControl={<Plus fill="rgba(33,33,33, 0.8)" />}
+            leftControl={{
+              icon: <Grid />,
+              navigator: () => console.log("Changing view to grid"),
+            }}
+            centralControl={{
+              icon: <User stroke="#ffffff" />,
+              navigator: () => navigation.navigate("Profile"),
+            }}
+            rightControl={{
+              icon: <Plus width={14} height={14} fill={"rgba(33,33,33,0.8)"} />,
+              navigator: () => navigation.navigate("Create"),
+            }}
           />
         </View>
       </ImageBackground>

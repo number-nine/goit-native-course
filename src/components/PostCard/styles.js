@@ -5,9 +5,12 @@ export default StyleSheet.create({
     width: "100%",
     rowGap: 8,
   },
+  photoWrapper: {
+    borderRadius: 8,
+    overflow:"hidden",
+  },
   photo: {
     width: "100%",
-    borderRadius: 8,
   },
   title: { fontSize: 16, fontWeight: 500 },
   details: {

@@ -7,6 +7,7 @@ export default StyleSheet.create({
   },
   main: {
     marginTop: 32,
+    marginBottom:32,
     paddingLeft: 16,
     paddingRight: 16,
   },

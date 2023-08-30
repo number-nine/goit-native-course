@@ -13,6 +13,7 @@ import styles from "./styles";
 import MainHeader from "../../components/MainHeader/MainHeader";
 import PhotoButton from "../../components/PhotoButton/PhotoButton";
 import EditorFooter from "../../components/EditorFooter/EditorFooter";
+import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
 
 import MinimalisticInputField from "../../components/MinimalisticInputField/MinimalisticInputField";
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
@@ -20,7 +21,7 @@ import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import Arrow from "../../images/arrow-left.svg";
 import MapPin from "../../images/map-pin.svg";
 
-export default function CreatePostsScreen() {
+export default function CreatePostsScreen({navigation}) {
   const [disabled, setDisabled] = useState(true);
 
   function reducer(state, action) {
@@ -32,7 +33,6 @@ export default function CreatePostsScreen() {
       default:
         newState = { ...state, [action.type]: action.payload };
     }
-    // console.log(newState);
     setDisabled(!(newState.title && newState.location));
     return newState;
   }
@@ -49,9 +49,9 @@ export default function CreatePostsScreen() {
 
   const handleSubmit = () => {
     if (disabled) return;
-    console.log("Submitting form...");
     console.log(state);
     handleReset();
+    navigation.navigate("Home");
   };
 
   const handleReset = () => {
@@ -64,47 +64,55 @@ export default function CreatePostsScreen() {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <MainHeader title={"Створити публікацію"} leftControl={<Arrow />} />
-      <ScrollView style={styles.main}>
-        <View style={styles.photoWrapper}>
-          {state.photo && <Image style={styles.photo} source={state.photo} />}
-          <PhotoButton
-            style={styles.photoButton}
-            onPress={handleSelectPhoto}
-            name="photo"
-          />
-        </View>
-        <Text style={styles.caption}>{"Завантажте фото"}</Text>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-        >
-          <MinimalisticInputField
-            placeholder={"Назва..."}
-            style={styles.title}
-            value={state.title}
-            onChange={dispatch}
-            name="title"
-          />
-          <MinimalisticInputField
-            placeholder={"Місцевість..."}
-            onFocusAction={onLocationFocusAction}
-            icon={<MapPin />}
-            style={styles.location}
-            value={state.location}
-            onChange={dispatch}
-            name="location"
-          />
-          <OrangeButton
-            label={"Опублікувати"}
-            style={styles.button}
-            disabled={disabled}
-            onPress={handleSubmit}
-          />
-        </KeyboardAvoidingView>
-      </ScrollView>
+    <ScreenLayout>
+      <View style={styles.wrapper}>
+        <MainHeader
+          title={"Створити публікацію"}
+          leftControl={{
+            icon: <Arrow />,
+            navigator: () => navigation.navigate("Home"),
+          }}
+        />
+        <ScrollView style={styles.main}>
+          <View style={styles.photoWrapper}>
+            {state.photo && <Image style={styles.photo} source={state.photo} />}
+            <PhotoButton
+              style={styles.photoButton}
+              onPress={handleSelectPhoto}
+              name="photo"
+            />
+          </View>
+          <Text style={styles.caption}>{"Завантажте фото"}</Text>
+          <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
+            <MinimalisticInputField
+              placeholder={"Назва..."}
+              style={styles.title}
+              value={state.title}
+              onChange={dispatch}
+              name="title"
+            />
+            <MinimalisticInputField
+              placeholder={"Місцевість..."}
+              onFocusAction={onLocationFocusAction}
+              icon={<MapPin />}
+              style={styles.location}
+              value={state.location}
+              onChange={dispatch}
+              name="location"
+            />
+            <OrangeButton
+              label={"Опублікувати"}
+              style={styles.button}
+              disabled={disabled}
+              onPress={handleSubmit}
+            />
+          </KeyboardAvoidingView>
+        </ScrollView>
 
-      <EditorFooter onPress={handleReset} />
-    </View>
+        <EditorFooter onPress={handleReset} />
+      </View>
+    </ScreenLayout>
   );
 }

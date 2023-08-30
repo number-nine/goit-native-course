@@ -26,6 +26,12 @@ export default function LoginScreen({navigation}) {
 
   const handleSubmit = () => {
     console.log(state);
+    dispatch({
+      type: "email", payload: ""
+    })
+    dispatch({
+      type: "password", payload: ""
+    })
      navigation.navigate("Home");
   }
 

@@ -10,17 +10,16 @@ export default function MainHeader({ leftControl, rightControl, title }) {
     <View style={styles.wraper}>
       <Pressable
         style={styles.controlWrapper}
-        onPress={() => {
-          console.log(
-            "Header left control. Usualy Navigate/BACK (but can be dispatched by name)"
-          );
-        }}
+        onPress={leftControl?.navigator}
       >
-        {leftControl}
+        {leftControl?.icon}
       </Pressable>
       <Title style={{ fontSize: 17, fontWeight: 500 }}>{title}</Title>
-      <Pressable style={styles.controlWrapper} onPress={rightControl.navigator}>
-        {rightControl.icon}
+      <Pressable
+        style={styles.controlWrapper}
+        onPress={rightControl?.navigator}
+      >
+        {rightControl?.icon}
       </Pressable>
     </View>
   );

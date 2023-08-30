@@ -13,6 +13,7 @@ export default StyleSheet.create({
   },
   postsContainer: {
     marginTop: 32,
+    marginBottom:32,
     rowGap: 32,
   },
 });

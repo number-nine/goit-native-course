@@ -1,5 +1,8 @@
 import React from "react";
-import { Pressable, Text, TouchableHighlight, TouchableOpacity } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 import styles from "./styles";
 
@@ -9,7 +12,7 @@ export default function OrangeButton({ label, disabled, ...props }) {
   return (
     <TouchableOpacity
       {...props}
-      activeOpacity={0.6}
+      activeOpacity={disabled ? 1 : 0.6}
       style={[
         styles.wrapper,
         disabled
@@ -31,4 +34,4 @@ export default function OrangeButton({ label, disabled, ...props }) {
       {!isText && label}
     </TouchableOpacity>
   );
-};
+}
