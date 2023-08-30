@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 
-import createScreenStyles from "./createPostsScreen.styles";
+import styles from "./styles";
 
 import MainHeader from "../../components/MainHeader/MainHeader";
 import PhotoButton from "../../components/PhotoButton/PhotoButton";
@@ -20,7 +20,7 @@ import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import Arrow from "../../images/arrow-left.svg";
 import MapPin from "../../images/map-pin.svg";
 
-export default () => {
+export default function CreatePostsScreen() {
   const [disabled, setDisabled] = useState(true);
 
   function reducer(state, action) {
@@ -60,30 +60,28 @@ export default () => {
   };
 
   const handleSelectPhoto = () => {
-    console.log('Opening file explorer...');
-  }
+    console.log("Opening file explorer...");
+  };
 
   return (
-    <View style={createScreenStyles.wrapper}>
+    <View style={styles.wrapper}>
       <MainHeader title={"Створити публікацію"} leftControl={<Arrow />} />
-      <ScrollView style={createScreenStyles.main}>
-        <View style={createScreenStyles.photoWrapper}>
-          {state.photo && (
-            <Image style={createScreenStyles.photo} source={state.photo} />
-          )}
+      <ScrollView style={styles.main}>
+        <View style={styles.photoWrapper}>
+          {state.photo && <Image style={styles.photo} source={state.photo} />}
           <PhotoButton
-            style={createScreenStyles.photoButton}
+            style={styles.photoButton}
             onPress={handleSelectPhoto}
             name="photo"
           />
         </View>
-        <Text style={createScreenStyles.caption}>{"Завантажте фото"}</Text>
+        <Text style={styles.caption}>{"Завантажте фото"}</Text>
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
           <MinimalisticInputField
             placeholder={"Назва..."}
-            style={createScreenStyles.title}
+            style={styles.title}
             value={state.title}
             onChange={dispatch}
             name="title"
@@ -92,14 +90,14 @@ export default () => {
             placeholder={"Місцевість..."}
             onFocusAction={onLocationFocusAction}
             icon={<MapPin />}
-            style={createScreenStyles.location}
+            style={styles.location}
             value={state.location}
             onChange={dispatch}
             name="location"
           />
           <OrangeButton
             label={"Опублікувати"}
-            style={createScreenStyles.button}
+            style={styles.button}
             disabled={disabled}
             onPress={handleSubmit}
           />
@@ -109,4 +107,4 @@ export default () => {
       <EditorFooter onPress={handleReset} />
     </View>
   );
-};
+}

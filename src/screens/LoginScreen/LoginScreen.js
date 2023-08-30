@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
 
-import loginScreenStyles from "./loginScreen.styles";
+import styles from "./styles";
 import InputField from "../../components/InputField/InputField";
 import PasswordField from "../../components/PasswordField/PasswordField";
 import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
@@ -15,7 +15,7 @@ function reducer(state, action) {
   return { ...state, [action.type]: action.payload };
 }
 
-export default () => {
+export default function LoginScreen() {
   const properties = {
     title: "Увійти",
     namePlaceholder: "Ім'я",
@@ -42,10 +42,10 @@ export default () => {
     <ImageBackground
       source={BackgroundSource}
       resizeMode="cover"
-      style={loginScreenStyles.back}
+      style={styles.back}
     >
-      <View style={loginScreenStyles.wrapper}>
-        <AvatarHolder style={loginScreenStyles.avatar} />
+      <View style={styles.wrapper}>
+        <AvatarHolder style={styles.avatar} />
         <Title style={{ fontSize: 30, fontWeight: 500 }}>
           {properties.title}
         </Title>
@@ -61,7 +61,7 @@ export default () => {
           name="password"
         />
         <OrangeButton
-          style={loginScreenStyles.button}
+          style={styles.button}
           label={properties.actionTitle}
           onPress={handleSubmit}
         />

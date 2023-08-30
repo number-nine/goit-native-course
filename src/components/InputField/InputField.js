@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { TextInput } from "react-native";
 
-import inputFieldStyles from "./inputField.styles";
+import styles from "./styles";
 
-export default ({ onChange, onFocusAction, placeholder, ...props }) => {
+export default function InputFields({
+  onChange,
+  onFocusAction,
+  placeholder,
+  ...props
+}) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleOnchange = (text) => {
@@ -22,7 +27,7 @@ export default ({ onChange, onFocusAction, placeholder, ...props }) => {
       {...props}
       placeholder={placeholder}
       style={[
-        inputFieldStyles.input,
+        styles.input,
         props.style,
         { borderColor: isFocused ? "#FF6C00" : "#e8e8e8" },
       ]}
@@ -31,4 +36,4 @@ export default ({ onChange, onFocusAction, placeholder, ...props }) => {
       onChangeText={handleOnchange}
     ></TextInput>
   );
-};
+}

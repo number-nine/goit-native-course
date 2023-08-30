@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Text, Pressable, View } from "react-native";
 
-import passwordFieldStyles from "./passwordField.style";
+import styles from "./styles";
 
 import InputField from "../InputField/InputField";
 
-export default (props) => {
+export default function PasswordField(props) {
   const [secureField, setSecureField] = useState(true);
 
   const handlePressIn = () => {
@@ -17,7 +17,7 @@ export default (props) => {
   };
 
   return (
-    <View style={passwordFieldStyles.wrapper}>
+    <View style={styles.wrapper}>
       <InputField
         {...props}
         placeholder="Пароль"
@@ -26,12 +26,12 @@ export default (props) => {
         maxLength={24}
       />
       <Pressable
-        style={passwordFieldStyles.switch}
+        style={styles.switch}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
       >
-        <Text style={passwordFieldStyles.text}>Показати</Text>
+        <Text style={styles.text}>Показати</Text>
       </Pressable>
     </View>
   );
-};
+}

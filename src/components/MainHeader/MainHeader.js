@@ -1,15 +1,15 @@
 import React from "react";
 import { Pressable, View } from "react-native";
 
-import mainHeaderStyles from "./mainHeader.styles";
+import styles from "./styles";
 
 import Title from "../../components/Title/Title";
 
-export default ({ leftControl, rightControl, title }) => {
+export default function MainHeader({ leftControl, rightControl, title }) {
   return (
-    <View style={mainHeaderStyles.wraper}>
+    <View style={styles.wraper}>
       <Pressable
-        style={mainHeaderStyles.controlWrapper}
+        style={styles.controlWrapper}
         onPress={() => {
           console.log(
             "Header left control. Usualy Navigate/BACK (but can be dispatched by name)"
@@ -20,7 +20,7 @@ export default ({ leftControl, rightControl, title }) => {
       </Pressable>
       <Title style={{ fontSize: 17, fontWeight: 500 }}>{title}</Title>
       <Pressable
-        style={mainHeaderStyles.controlWrapper}
+        style={styles.controlWrapper}
         onPress={() => {
           console.log(
             "Header left control. Usualy Navigate/LOGOUT (but can be dispatched by name)"
@@ -31,4 +31,4 @@ export default ({ leftControl, rightControl, title }) => {
       </Pressable>
     </View>
   );
-};
+}

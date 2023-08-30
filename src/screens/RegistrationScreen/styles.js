@@ -20,9 +20,7 @@ export default StyleSheet.create({
   },
   avatar: {
     position: "absolute",
-    top: -60,
-    left: "50%",
-    marginLeft: -44,
+    top: -44,
   },
   button: {
     marginTop: 27,

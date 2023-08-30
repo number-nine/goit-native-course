@@ -2,37 +2,40 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   wrapper: {
-    // flexDirection: "column",
-    width: "100%",
-    alignItems: "center",
+    position: "relative",
+    flex: 1,
     justifyContent: "space-between",
-    // rowGap: 16,
-    // position: "relative",
-    width: "100%",
-
-    paddingLeft: 16,
-    paddingRight: 16,
-    marginTop:92,
-    // paddingTop: 92,
-    // paddingBottom: 45,
-
+    alignItems: "center",
     backgroundColor: "#ffffff",
-
+    marginTop: 150,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
+  main: {
+    flex: 1,
+    width:"100%",
+    paddingLeft: 16,
+    paddingRight: 16,
+    marginTop: 32,
+    marginBottom:32,
+  },
+  postsContainer: {
+    rowGap: 32,
+  },
   avatar: {
     position: "absolute",
-    top: -60,
-    left: "50%",
-    marginLeft: -44,
+    top: -44,
+    left: 0,
   },
-  button: {
-    marginTop: 27,
+  author: {
+    marginTop:92,
+    fontSize: 30,
+    color: "#212121",
   },
-  back: {
-    width: "100%",
-    flex: 1,
-    justifyContent: "flex-end",
-  },
+  logout: {
+    position: 'absolute',
+    top: 22,
+    right:16,
+  }
+
 });

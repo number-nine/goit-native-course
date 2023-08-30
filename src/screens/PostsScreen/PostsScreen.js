@@ -12,7 +12,7 @@ import Grid from "../../images/grid.svg";
 import User from "../../images/user.svg";
 import LogOut from "../../images/log-out.svg";
 
-export default () => {
+export default function PostsScreen() {
   return (
     <View style={styles.wrapper}>
       <MainHeader
