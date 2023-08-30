@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
 
 import styles from "./styles";
+import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
 import InputField from "../../components/InputField/InputField";
 import PasswordField from "../../components/PasswordField/PasswordField";
 import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
@@ -15,7 +16,7 @@ function reducer(state, action) {
   return { ...state, [action.type]: action.payload };
 }
 
-export default function RegistrationScreen () {
+export default function RegistrationScreen({ navigation }) {
   const properties = {
     title: "Реєстрація",
     namePlaceholder: "Ім'я",
@@ -24,14 +25,14 @@ export default function RegistrationScreen () {
     switchAction: ["Вже є акаунт? ", "Увійти"],
   };
 
-    const handleSubmit = () => {
-      console.log("Signing up...");
-      console.log(state);
-    };
+  const handleSubmit = () => {
+    console.log(state);
+    navigation.navigate("Home");
+  };
 
-    const handleChangeScreen = () => {
-      console.log("Navigating to login screen...");
-    };
+  const handleChangeScreen = () => {
+    navigation.navigate("Login");
+  };
 
   const [state, dispatch] = useReducer(reducer, {
     name: "",
@@ -40,44 +41,46 @@ export default function RegistrationScreen () {
   });
 
   return (
-    <ImageBackground
-      source={BackgroundSource}
-      resizeMode="cover"
-      style={styles.back}
-    >
-      <View style={styles.wrapper}>
-        <AvatarHolder style={styles.avatar} />
-        <Title style={{ fontSize: 30, fontWeight: 500 }}>
-          {properties.title}
-        </Title>
-        <InputField
-          onChange={dispatch}
-          placeholder={properties.namePlaceholder}
-          value={state.name}
-          name="name"
-        />
-        <InputField
-          onChange={dispatch}
-          placeholder={properties.emailPlaceholder}
-          value={state.email}
-          name="email"
-        />
-        <PasswordField
-          onChange={dispatch}
-          value={state.password}
-          name="password"
-        />
-        <OrangeButton
-          style={styles.button}
-          label={properties.actionTitle}
-          onPress={handleSubmit}
-        />
-        <CredentialsLink
-          label={properties.switchAction[0]}
-          nestedLabel={properties.switchAction[1]}
-          onPress={handleChangeScreen}
-        />
-      </View>
-    </ImageBackground>
+    <ScreenLayout>
+      <ImageBackground
+        source={BackgroundSource}
+        resizeMode="cover"
+        style={styles.back}
+      >
+        <View style={styles.wrapper}>
+          <AvatarHolder style={styles.avatar} />
+          <Title style={[styles.title, { fontSize: 30, fontWeight: 500 }]}>
+            {properties.title}
+          </Title>
+          <InputField
+            onChange={dispatch}
+            placeholder={properties.namePlaceholder}
+            value={state.name}
+            name="name"
+          />
+          <InputField
+            onChange={dispatch}
+            placeholder={properties.emailPlaceholder}
+            value={state.email}
+            name="email"
+          />
+          <PasswordField
+            onChange={dispatch}
+            value={state.password}
+            name="password"
+          />
+          <OrangeButton
+            style={styles.button}
+            label={properties.actionTitle}
+            onPress={handleSubmit}
+          />
+          <CredentialsLink
+            label={properties.switchAction[0]}
+            nestedLabel={properties.switchAction[1]}
+            onPress={handleChangeScreen}
+          />
+        </View>
+      </ImageBackground>
+    </ScreenLayout>
   );
-};
+}

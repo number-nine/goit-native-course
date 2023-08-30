@@ -19,15 +19,8 @@ export default function MainHeader({ leftControl, rightControl, title }) {
         {leftControl}
       </Pressable>
       <Title style={{ fontSize: 17, fontWeight: 500 }}>{title}</Title>
-      <Pressable
-        style={styles.controlWrapper}
-        onPress={() => {
-          console.log(
-            "Header left control. Usualy Navigate/LOGOUT (but can be dispatched by name)"
-          );
-        }}
-      >
-        {rightControl}
+      <Pressable style={styles.controlWrapper} onPress={rightControl.navigator}>
+        {rightControl.icon}
       </Pressable>
     </View>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Pressable, View } from "react-native";
+import { Text, Pressable, View, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
@@ -25,13 +25,14 @@ export default function PasswordField(props) {
         secureTextEntry={secureField}
         maxLength={24}
       />
-      <Pressable
+      <TouchableOpacity
+        activeOpacity={0.6}
         style={styles.switch}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
       >
         <Text style={styles.text}>Показати</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }

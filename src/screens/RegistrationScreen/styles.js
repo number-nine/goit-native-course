@@ -18,6 +18,9 @@ export default StyleSheet.create({
     borderTopStartRadius: 25,
     borderTopEndRadius: 25,
   },
+  title: {
+    marginBottom: 16,
+  },
   avatar: {
     position: "absolute",
     top: -44,

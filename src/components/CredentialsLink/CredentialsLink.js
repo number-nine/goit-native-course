@@ -1,15 +1,15 @@
 import React from "react";
-import { Pressable, Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
 export default function CredentialsLink({ label, nestedLabel, ...props }) {
   return (
-    <Pressable {...props} style={[props.style]}>
+    <TouchableOpacity {...props} style={[props.style]} activeOpacity={0.6}>
       <Text style={styles.label}>
         {label}
         <Text style={styles.nestedLabel}>{nestedLabel}</Text>
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
