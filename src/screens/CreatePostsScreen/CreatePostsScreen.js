@@ -66,13 +66,6 @@ export default function CreatePostsScreen({navigation}) {
   return (
     <ScreenLayout>
       <View style={styles.wrapper}>
-        <MainHeader
-          title={"Створити публікацію"}
-          leftControl={{
-            icon: <Arrow />,
-            navigator: () => navigation.navigate("Home"),
-          }}
-        />
         <ScrollView style={styles.main}>
           <View style={styles.photoWrapper}>
             {state.photo && <Image style={styles.photo} source={state.photo} />}
@@ -83,9 +76,7 @@ export default function CreatePostsScreen({navigation}) {
             />
           </View>
           <Text style={styles.caption}>{"Завантажте фото"}</Text>
-          <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-          >
+
             <MinimalisticInputField
               placeholder={"Назва..."}
               style={styles.title}
@@ -108,7 +99,6 @@ export default function CreatePostsScreen({navigation}) {
               disabled={disabled}
               onPress={handleSubmit}
             />
-          </KeyboardAvoidingView>
         </ScrollView>
 
         <EditorFooter onPress={handleReset} />

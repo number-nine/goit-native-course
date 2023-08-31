@@ -5,6 +5,7 @@ export default StyleSheet.create({
     width: "100%",
     flex: 1,
     justifyContent: "space-between",
+    backgroundColor: "#ffffff",
   },
   main: {
     flex: 1,

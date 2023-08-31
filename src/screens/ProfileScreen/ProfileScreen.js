@@ -24,7 +24,7 @@ import Logout from '../../images/log-out.svg';
 export default function ProfileScreen({navigation}) {
   return (
     <ScreenLayout>
-      <ImageBackground
+      {/* <ImageBackground
         source={BackgroundSource}
         resizeMode="cover"
         style={styles.back}
@@ -39,15 +39,15 @@ export default function ProfileScreen({navigation}) {
           </Pressable>
           <Text style={[styles.author, { fontWeight: 500 }]}>
             Natali Romanova
-          </Text>
-          <ScrollView style={styles.main}>
-            <View style={styles.postsContainer}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
-            </View>
-          </ScrollView>
-          <PostsFooter
+          </Text> */}
+      <ScrollView style={styles.main}>
+        <View style={styles.postsContainer}>
+          <PostCard />
+          <PostCard />
+          <PostCard />
+        </View>
+      </ScrollView>
+      {/* <PostsFooter
             leftControl={{
               icon: <Grid />,
               navigator: () => console.log("Changing view to grid"),
@@ -60,9 +60,9 @@ export default function ProfileScreen({navigation}) {
               icon: <Plus width={14} height={14} fill={"rgba(33,33,33,0.8)"} />,
               navigator: () => navigation.navigate("Create"),
             }}
-          />
-        </View>
-      </ImageBackground>
+          /> */}
+      {/* </View> 
+       </ImageBackground>*/}
     </ScreenLayout>
   );
 }
