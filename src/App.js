@@ -37,15 +37,15 @@ function App() {
           component={RegistrationScreen}
           // options={{ headerShown: false }}
         />
-        <MainStack.Screen name="Profile" component={ProfileScreen} />
-        <MainStack.Screen name="Create" component={CreatePostsScreen} />
+        {/* <MainStack.Screen name="Profile" component={ProfileScreen} />
+        <MainStack.Screen name="Create" component={CreatePostsScreen} /> */}
         <MainStack.Screen
           name="Home"
           component={HomeScreen}
           // options={{ headerShown: false }}
         />
-        <MainStack.Screen name="Comments" component={CommentsScreen} />
-        <MainStack.Screen name="Posts" component={PostsScreen} />
+        {/* <MainStack.Screen name="Comments" component={CommentsScreen} />
+        <MainStack.Screen name="Posts" component={PostsScreen} /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );

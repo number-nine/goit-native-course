@@ -25,10 +25,15 @@ export default StyleSheet.create({
     // justifyContent: "space-between",
     // alignItems: "center",
     backgroundColor: "#ffffff",
+    // height: 275,
     // marginTop: 150,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     borderBottomLeftRadius: 25,
+
+    borderColor: "#000000",
+    borderWidth: 1,
+    
   },
 
   footerButton: {

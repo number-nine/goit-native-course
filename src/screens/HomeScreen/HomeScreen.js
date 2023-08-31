@@ -29,6 +29,14 @@ export default function HomeScreen({ navigation }) {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontSize: 17, fontWeight: 500 },
+        headerStyle: {
+          height: 88,
+          borderBottomColor: "rgba(33, 33, 33, 0.3)",
+          borderBottomWidth: 1,
+        },
+
         tabBarButton: ({ accessibilityState, ...props }) => {
           let icon;
           const focused = accessibilityState.selected;
@@ -51,7 +59,6 @@ export default function HomeScreen({ navigation }) {
               label={icon}
               style={[
                 styles.footerButton,
-                ,
                 {
                   backgroundColor: focused ? "#FF6C00" : "#ffffff",
                   borderColor: focused ? "#FF6C00" : "#ffffff",
@@ -60,7 +67,7 @@ export default function HomeScreen({ navigation }) {
             />
           );
         },
-        tabBarItemStyle: styles.tabBarItemWrapper,
+        // tabBarItemStyle: styles.tabBarItemWrapper,
         tabBarStyle: styles.tabBarWrapper,
       })}
       backBehavior="history"
@@ -80,13 +87,6 @@ export default function HomeScreen({ navigation }) {
             />
           ),
           title: "Публікації",
-          headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 17, fontWeight: 500 },
-          headerStyle: {
-            height: 88,
-            borderBottomColor: "rgba(33, 33, 33, 0.3)",
-            borderBottomWidth: 1,
-          },
         }}
       />
       <Tabs.Screen
@@ -104,21 +104,17 @@ export default function HomeScreen({ navigation }) {
             />
           ),
           title: "Створити публікацію",
-          headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 17, fontWeight: 500 },
-          headerStyle: {
-            height: 88,
-            borderBottomColor: "rgba(33, 33, 33, 0.3)",
-            borderBottomWidth: 1,
-          },
         }}
       />
       <Tabs.Screen
         name="Profile"
         component={ProfileScreen}
-              options={{
-            header: ()=><ProfileHeader/>,
-          headerStyle: styles.profileHeader,
+        options={{
+          header: () => <ProfileHeader />,
+        
+
+          // headerStyle: { height: 500 },
+          // headerShown:false,
         }}
       />
     </Tabs.Navigator>
