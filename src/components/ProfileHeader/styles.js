@@ -3,9 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   wrapper: {
     position: "relative",
-    // flex: 1,
-    // height:150,
-    // justifyContent: "space-between",
+   
     alignItems: "center",
     backgroundColor: "#ffffff",
     marginTop: 150,
@@ -29,5 +27,7 @@ export default StyleSheet.create({
     position: "absolute",
     top: 22,
     right: 16,
+    width: 24,
+    height:24,
   },
 });

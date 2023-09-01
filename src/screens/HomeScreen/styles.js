@@ -7,6 +7,7 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     // alignItems: "center",
     width: "100%",
+    // backgroundColor: "yellow",
 
     paddingTop: 9,
     paddingBottom: 34,
@@ -15,21 +16,16 @@ export default StyleSheet.create({
     borderTopColor: "rgba(33, 33, 33, 0.3)",
     borderTopWidth: 1,
 
-    // backgroundColor:'yellow',
   },
   tabBarItemWrapper: {},
 
   profileHeader: {
-    // position: "relative",
-    // flex: 1,
-    // justifyContent: "space-between",
-    // alignItems: "center",
+
     backgroundColor: "#ffffff",
-    // height: 275,
-    // marginTop: 150,
+
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    borderBottomLeftRadius: 25,
+    // borderBottomLeftRadius: 25,
 
     borderColor: "#000000",
     borderWidth: 1,

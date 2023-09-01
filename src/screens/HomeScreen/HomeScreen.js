@@ -1,18 +1,15 @@
 import React from "react";
-import { View, ScrollView, Text } from "react-native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import { getHeaderTitle } from "@react-navigation/elements";
+import { createStackNavigator } from "@react-navigation/stack";
+
 
 import styles from "./styles";
 
-import MainHeader from "../../components/MainHeader/MainHeader";
-import ProfileBadge from "../../components/ProfileBadge/ProfileBadge";
-import PostCard from "../../components/PostCard/PostCard";
-import PostsFooter from "../../components/PostsFooter/PostsFooter";
-import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
+
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
+import CommentsScreen from "../CommentsScreen/CommentsScreen";
 
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
 import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
@@ -24,6 +21,79 @@ import Plus from "../../images/plus.svg";
 import PostsScreen from "../PostsScreen/PostsScreen";
 
 const Tabs = createBottomTabNavigator();
+const PostsStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
+
+function PostsStackScreen({ navigation }) {
+  return (
+    <PostsStack.Navigator
+      initialRouteName="Posts"
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontSize: 17, fontWeight: 500 },
+        headerStyle: {
+          height: 88,
+          borderBottomColor: "rgba(33, 33, 33, 0.3)",
+          borderBottomWidth: 1,
+        },
+      }}
+    >
+      <PostsStack.Screen
+        name="Posts"
+        component={PostsScreen}
+        options={{
+          headerRight: () => (
+            <OrangeButton
+              label={<LogOut />}
+              style={[
+                styles.footerButton,
+                { backgroundColor: "#ffffff", borderColor: "#ffffff" },
+              ]}
+              onPress={() => navigation.navigate("Login")}
+            />
+          ),
+          title: "Публікації",
+          headerLeft: null,
+        }}
+      />
+      <PostsStack.Screen
+        name="Comments"
+        component={CommentsScreen}
+        options={{
+          title: "Коментарі",
+        }}
+      />
+    </PostsStack.Navigator>
+  );
+}
+
+function ProfileStackScreen({ navigation }) {
+  return (
+    <ProfileStack.Navigator
+      initialRouteName="Profile"
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontSize: 17, fontWeight: 500 },
+        headerStyle: {
+          height: 88,
+          borderBottomColor: "rgba(33, 33, 33, 0.3)",
+          borderBottomWidth: 1,
+        },
+      }}
+    >
+      <ProfileStack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <ProfileStack.Screen
+        name="Comments"
+        component={CommentsScreen}
+        options={{ title: "Коментарі" }}
+      />
+    </ProfileStack.Navigator>
+  );
+}
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -41,13 +111,13 @@ export default function HomeScreen({ navigation }) {
           let icon;
           const focused = accessibilityState.selected;
           switch (route.name) {
-            case "Posts":
+            case "PostsStackScreen":
               icon = <Grid stroke={focused ? "#ffffff" : "#212121"} />;
               break;
             case "Create":
               icon = <Plus fill={focused ? "#ffffff" : "rgba(33,33,33,0.8)"} />;
               break;
-            case "Profile":
+            case "ProfileStackScreen":
               icon = (
                 <User stroke={focused ? "#ffffff" : "rgba(33,33,33,0.8)"} />
               );
@@ -73,20 +143,10 @@ export default function HomeScreen({ navigation }) {
       backBehavior="history"
     >
       <Tabs.Screen
-        name="Posts"
-        component={PostsScreen}
+        name="PostsStackScreen"
+        component={PostsStackScreen}
         options={{
-          headerRight: () => (
-            <OrangeButton
-              label={<LogOut />}
-              style={[
-                styles.footerButton,
-                { backgroundColor: "#ffffff", borderColor: "#ffffff" },
-              ]}
-              onPress={() => navigation.navigate("Login")}
-            />
-          ),
-          title: "Публікації",
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -107,14 +167,13 @@ export default function HomeScreen({ navigation }) {
         }}
       />
       <Tabs.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="ProfileStackScreen"
+        component={ProfileStackScreen}
         options={{
-          header: () => <ProfileHeader />,
-        
-
-          // headerStyle: { height: 500 },
-          // headerShown:false,
+          header: ({ options, navigation }) => (
+            <ProfileHeader title={options.title} navigation={navigation} />
+          ),
+          title: "Natali Romanova",
         }}
       />
     </Tabs.Navigator>
