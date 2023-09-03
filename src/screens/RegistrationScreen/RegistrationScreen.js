@@ -39,7 +39,7 @@ export default function RegistrationScreen({ navigation }) {
       type: "password",
       payload: "",
     });
-    navigation.navigate("Home");
+    navigation.navigate("HomeStack");
   };
 
   const handleChangeScreen = () => {

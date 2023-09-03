@@ -16,13 +16,12 @@ export default function CommentsScreen({
   return (
     <ScreenLayout>
       <View style={styles.wrapper}>
-
-        <ScrollView style={styles.main}>
+        <ScrollView style={styles.main} keyboardShouldPersistTaps="handled">
           <Image style={styles.photo} source={photo} />
 
           <CommentsList style={styles.list} />
 
-          <CommentsInput style={styles.input}  />
+          <CommentsInput style={styles.input} />
         </ScrollView>
       </View>
     </ScreenLayout>
