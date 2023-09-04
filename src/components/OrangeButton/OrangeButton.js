@@ -16,7 +16,7 @@ export default function OrangeButton({ label, disabled, ...props }) {
       style={[
         styles.wrapper,
         disabled
-          ? { borderWidth: 0, backgroundColor: "#F6F6F6" }
+          ? { borderColor: "#F6F6F6", backgroundColor: "#F6F6F6" }
           : { borderColor: "#FF6C00", backgroundColor: "#FF6C00" },
         props.style,
       ]}

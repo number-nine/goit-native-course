@@ -2,6 +2,7 @@ import React, { useReducer, useState, useEffect, useRef } from "react";
 import { View, ScrollView, Image, Text, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import * as Location from "expo-location";
 
 import styles from "./styles";
 
@@ -14,25 +15,40 @@ import OrangeButton from "../../components/OrangeButton/OrangeButton";
 
 import MapPin from "../../images/map-pin.svg";
 
-export default function CreatePostsScreen({ navigation }) {
-  const [disabled, setDisabled] = useState(true);
-  const [hasPermission, setHasPermission] = useState(null);
-  const [cameraRef, setCameraRef] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [photoUri, setPhotoUri] = useState(null);
+function reducer(state, action) {
+  let update;
+  switch (action.type) {
+    case "reset":
+      update = { photo: null, title: null, location: null };
+      break;
+    default:
+      update = { ...state, [action.type]: action.payload };
+  }
+  return update;
+}
 
+export default function CreatePostsScreen({ navigation }) {
   useEffect(() => {
     (async () => {
       try {
         const { status } = await Camera.requestCameraPermissionsAsync();
         await MediaLibrary.requestPermissionsAsync();
         setHasPermission(status === "granted");
-        console.log("permissions granted");
       } catch (error) {
         console.log(error.message);
       }
     })();
   }, []);
+
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraRef, setCameraRef] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+
+  const [state, dispatch] = useReducer(reducer, {
+    photo: null,
+    title: null,
+    location: null,
+  });
 
   if (hasPermission === null) {
     return <View />;
@@ -41,53 +57,51 @@ export default function CreatePostsScreen({ navigation }) {
     return <Text>No access to camera</Text>;
   }
 
-  // function reducer(state, action) {
-  //   let newState;
-  //   switch (action.type) {
-  //     case "reset":
-  //       newState = { photo: "", title: "", location: "" };
-  //       break;
-  //     default:
-  //       newState = { ...state, [action.type]: action.payload };
-  //   }
-  //   setDisabled(!(newState.title && newState.location));
-  //   return newState;
-  // }
-
-  const onLocationFocusAction = () => {
-    console.log("Location selection action -> opening google maps");
-  };
-
-  // const [state, dispatch] = useReducer(reducer, {
-  //   photo: "",
-  //   title: "",
-  //   location: "",
-  // });
-
-  const handleSubmit = () => {
-    // if (disabled) return;
-    // console.log(state);
-    handleReset();
-    navigation.navigate("HomeStack");
+  const handleSubmit = async () => {
+    console.log(isFilled);
+    if (!isFilled) return;
+    const spot = await getSpot();
+    console.log(spot);
+    console.log(state);
+    // handleReset();
+    // navigation.navigate("HomeStack");
   };
 
   const handleReset = () => {
-    // console.log("Reseting form... ");
-    setPhotoUri(null);
-    // navigation.navigate("HomeStack");
-    // dispatch({ type: "reset" });
+    dispatch({ type: "reset" });
   };
 
-  const handleSelectPhoto = () => {
-    console.log("Opening file explorer...");
-  };
+  const getSpot = async () => {
+    try {
+      let { status } = await Location.requestBackgroundPermissionsAsync();
+      if (status !== "granted") {
+        throw new Error("Permission to access location was denied");
+        
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      return {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      };
+    } catch (error) {
+      console.log(error.message);
+      return {
+        latitude: 0,
+        longitude: 0,
+      };
+    }
+    
+  }
+
+const {photo, title, location } = state
+  const isFilled = photo && title && location;
 
   return (
     <ScreenLayout>
       <View style={styles.wrapper}>
         <ScrollView style={styles.main}>
           <View style={styles.photoView}>
-            {!photoUri && (
+            {!state.photo && (
               <Camera
                 style={styles.photoWrapper}
                 type={type}
@@ -98,7 +112,7 @@ export default function CreatePostsScreen({ navigation }) {
                   onPress={async () => {
                     if (cameraRef) {
                       const { uri } = await cameraRef.takePictureAsync();
-                      setPhotoUri(uri);
+                      dispatch({ type: "photo", payload: uri });
                       await MediaLibrary.createAssetAsync(uri);
                     }
                   }}
@@ -106,33 +120,34 @@ export default function CreatePostsScreen({ navigation }) {
                 />
               </Camera>
             )}
-            {photoUri && (
-              <Image style={styles.photoWrapper} source={{ uri: photoUri }} />
+            {state.photo && (
+              <Image
+                style={styles.photoWrapper}
+                source={{ uri: state.photo }}
+              />
             )}
+            <Text style={styles.caption}>{"Завантажте фото"}</Text>
           </View>
-
-          <Text style={styles.caption}>{"Завантажте фото"}</Text>
 
           <MinimalisticInputField
             placeholder={"Назва..."}
             style={styles.title}
-            // value={state.title}
-            // onChange={dispatch}
+            value={state.title}
+            onChangeDispatch={dispatch}
             name="title"
           />
           <MinimalisticInputField
             placeholder={"Місцевість..."}
-            onFocusAction={onLocationFocusAction}
             icon={<MapPin />}
             style={styles.location}
-            // value={state.location}
-            // onChange={dispatch}
+            value={state.loaction}
+            onChangeDispatch={dispatch}
             name="location"
           />
           <OrangeButton
             label={"Опублікувати"}
             style={styles.button}
-            // disabled={disabled}
+            disabled={!isFilled}
             onPress={handleSubmit}
           />
         </ScrollView>

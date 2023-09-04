@@ -40,10 +40,9 @@ export default function LoginScreen({navigation}) {
   }
 
   const [state, dispatch] = useReducer(reducer, {
-    email: "",
-    password: "",
+    email: null,
+    password: null,
   });
-
   return (
     <ScreenLayout>
       <ImageBackground
@@ -56,13 +55,13 @@ export default function LoginScreen({navigation}) {
             {properties.title}
           </Title>
           <InputField
-            onChange={dispatch}
+            onChangeDispatch={dispatch}
             placeholder={properties.emailPlaceholder}
             value={state.email}
             name="email"
           />
           <PasswordField
-            onChange={dispatch}
+            onChangeDispatch={dispatch}
             value={state.password}
             name="password"
           />

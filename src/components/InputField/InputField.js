@@ -4,22 +4,18 @@ import { TextInput } from "react-native";
 import styles from "./styles";
 
 export default function InputFields({
-  onChange,
-  onFocusAction,
+  onChangeDispatch,
   placeholder,
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleOnchange = (text) => {
-    onChange({ type: props.name, payload: text });
+    onChangeDispatch({ type: props.name, payload: text });
   };
 
   const handleOnFocus = () => {
     setIsFocused(true);
-    if (typeof onFocusAction === "function") {
-      onFocusAction();
-    }
   };
 
   return (

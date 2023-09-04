@@ -8,10 +8,11 @@ export default StyleSheet.create({
     backgroundColor: "#ffffff",
   },
   main: {
-    flex: 1,
+    // flex: 1,
     marginTop: 32,
     paddingLeft: 16,
     paddingRight: 16,
+    rowGap:50,
   },
   photoWrapper: {
     position: "relative",
@@ -43,40 +44,10 @@ export default StyleSheet.create({
     marginTop: 32,
   },
 
-  container: { flex: 1 },
-  camera: { flex: 1 },
   photoView: {
-    // flex: 1,
-    // backgroundColor: "transparent",
-    // justifyContent: "flex-end",
+
     borderRadius: 8,
     overflow: "hidden",
   },
 
-  flipContainer: {
-    flex: 0.1,
-    alignSelf: "flex-end",
-  },
-
-  button: { alignSelf: "center" },
-
-  takePhotoOut: {
-    borderWidth: 2,
-    borderColor: "white",
-    height: 50,
-    width: 50,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 50,
-  },
-
-  takePhotoInner: {
-    borderWidth: 2,
-    borderColor: "white",
-    height: 40,
-    width: 40,
-    backgroundColor: "white",
-    borderRadius: 50,
-  },
 });

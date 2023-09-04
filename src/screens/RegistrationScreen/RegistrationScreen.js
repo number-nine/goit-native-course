@@ -65,19 +65,19 @@ export default function RegistrationScreen({ navigation }) {
             {properties.title}
           </Title>
           <InputField
-            onChange={dispatch}
+            onChangeDispatch={dispatch}
             placeholder={properties.namePlaceholder}
             value={state.name}
             name="name"
           />
           <InputField
-            onChange={dispatch}
+            onChangeDispatch={dispatch}
             placeholder={properties.emailPlaceholder}
             value={state.email}
             name="email"
           />
           <PasswordField
-            onChange={dispatch}
+            onChangeDispatch={dispatch}
             value={state.password}
             name="password"
           />
