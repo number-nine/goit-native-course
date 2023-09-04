@@ -3,12 +3,12 @@ import React from "react";
 import Comment from "../Comment/Comment";
 import { View } from "react-native";
 
-import commentsListStyle from "./commentsList.style";
+import styles from "./styles";
 
-export default (props) => {
+export default function CommentsList(props) {
 
     return (
-      <View style={[commentsListStyle.wrapper, props.style]}>
+      <View style={[styles.wrapper, props.style]}>
         <Comment />
         <Comment even={true} />
         <Comment />

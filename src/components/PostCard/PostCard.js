@@ -1,31 +1,58 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import Title from '../Title/Title';
+import Title from "../Title/Title";
 
-import postCardStyles from "./postCard.styles";
+import styles from "./styles";
 
-import MessageCircle from '../../images/message-circle.svg';
-import MapPin from '../../images/map-pin.svg';
+import MessageCircle from "../../images/message-circle.svg";
+import MapPin from "../../images/map-pin.svg";
+import Like from "../../images/thumbs-up.svg";
 
-
-export default () => {
+export default function PostCard() {
+  const navigation = useNavigation();
   return (
-    <View style={postCardStyles.wrapper}>
-      <Image source={require("../../images/post-foto.jpg")} style={postCardStyles.photo}></Image>
-      <Title style={postCardStyles.title}>{"Ліс"}</Title>
-      <View style = {postCardStyles.details}>
-        <View style={postCardStyles.detailsItem}>
-          <MessageCircle />
-          <Text style={postCardStyles.detailsCaption}>{0}</Text>
+    <View style={styles.wrapper}>
+        <Image
+          source={require("../../images/post-foto.jpg")}
+          style={styles.photo}
+        />
+      <Title style={styles.title}>{"Ліс"}</Title>
+      <View style={styles.details}>
+        <View style={styles.statistic}>
+          <TouchableOpacity
+            style={styles.detailsItem}
+            activeOpacity={0.6}
+            onPress={() => {navigation.navigate("Comments")
+            }}
+          >
+              <MessageCircle />
+              <Text style={styles.detailsCaption}>{0}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.detailsItem}
+            activeOpacity={0.6}
+            onPress={() => {
+              console.log("Like!");
+            }}
+          >
+            <Like fill={"#bdbdbd"} />
+            <Text style={styles.detailsCaption}>{100}</Text>
+          </TouchableOpacity>
         </View>
-        <View style={postCardStyles.detailsItem}>
+        <View style={styles.detailsItem}>
           <MapPin />
-          <Text style={postCardStyles.detailsCaption}>
+          <Text style={styles.detailsCaption}>
             {"Ivano-Frankivs'k Region, Ukraine"}
           </Text>
         </View>
       </View>
     </View>
   );
-};
+}

@@ -4,7 +4,6 @@ export default StyleSheet.create({
   wrapper: {
     width: 171,
     height: 60,
-    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
   },

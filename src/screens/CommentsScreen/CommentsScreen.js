@@ -1,26 +1,29 @@
 import React from "react";
 import { View, ScrollView, Image } from "react-native";
 
-import commentsScreenStyles from "./commentsScreen.styles";
+import styles from "./styles";
 
-import MainHeader from "../../components/MainHeader/MainHeader";
 import CommentsInput from "../../components/CommentsInput/CommentsInput";
 import CommentsList from "../../components/CommentsList/CommentsList";
+import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
 
-import Arrow from "../../images/arrow-left.svg";
 
-export default ({ photo = require("../../images/photo1.jpg") }) => {
+export default function CommentsScreen({
+  photo = require("../../images/photo1.jpg"),
+}) {
+
+
   return (
-    <View style={commentsScreenStyles.wrapper}>
-      <MainHeader title={"Коментарі"} leftControl={<Arrow />} />
-      <ScrollView style={commentsScreenStyles.main}>
-       
-          <Image style={commentsScreenStyles.photo} source={photo} />
-      
-          <CommentsList style={commentsScreenStyles.list} />
-      
-          <CommentsInput style={commentsScreenStyles.input} />
-      </ScrollView>
-    </View>
+    <ScreenLayout>
+      <View style={styles.wrapper}>
+        <ScrollView style={styles.main} keyboardShouldPersistTaps="handled">
+          <Image style={styles.photo} source={photo} />
+
+          <CommentsList style={styles.list} />
+
+          <CommentsInput style={styles.input} />
+        </ScrollView>
+      </View>
+    </ScreenLayout>
   );
-};
+}

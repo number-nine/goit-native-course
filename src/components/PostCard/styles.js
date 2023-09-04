@@ -7,13 +7,14 @@ export default StyleSheet.create({
   },
   photo: {
     width: "100%",
+    borderRadius: 8,
+
   },
   title: { fontSize: 16, fontWeight: 500 },
   details: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
-
   detailsItem: {
     flexDirection: "row",
     columnGap: 4,
@@ -21,5 +22,9 @@ export default StyleSheet.create({
   detailsCaption: {
     color: "#212121",
     fontSize: 16,
+  },
+  statistic: {
+    flexDirection: "row",
+    columnGap: 24,
   },
 });

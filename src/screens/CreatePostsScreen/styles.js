@@ -5,6 +5,7 @@ export default StyleSheet.create({
     width: "100%",
     flex: 1,
     justifyContent: "space-between",
+    backgroundColor: "#ffffff",
   },
   main: {
     flex: 1,
@@ -16,9 +17,7 @@ export default StyleSheet.create({
     position: "relative",
     height: 240,
     backgroundColor: "#f6f6f6",
-    borderRadius: 8,
-    borderColor: "#e8e8e8",
-    borderWidth: 1,
+
   },
   photo: {
     width: "100%",
@@ -42,5 +41,42 @@ export default StyleSheet.create({
   },
   button: {
     marginTop: 32,
+  },
+
+  container: { flex: 1 },
+  camera: { flex: 1 },
+  photoView: {
+    // flex: 1,
+    // backgroundColor: "transparent",
+    // justifyContent: "flex-end",
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+
+  flipContainer: {
+    flex: 0.1,
+    alignSelf: "flex-end",
+  },
+
+  button: { alignSelf: "center" },
+
+  takePhotoOut: {
+    borderWidth: 2,
+    borderColor: "white",
+    height: 50,
+    width: 50,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+  },
+
+  takePhotoInner: {
+    borderWidth: 2,
+    borderColor: "white",
+    height: 40,
+    width: 40,
+    backgroundColor: "white",
+    borderRadius: 50,
   },
 });

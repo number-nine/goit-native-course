@@ -1,43 +1,34 @@
 import React from "react";
-import {View, Pressable} from "react-native";
+import { View, Pressable } from "react-native";
 
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
-import Plus from "../../images/plus.svg";
-import postsFooterStyles from "./postsFooter.styles";
+import styles from "./styles";
 
-export default ({ leftControl, rightControl }) => {
+export default function PostsFooter({
+  leftControl,
+  rightControl,
+  centralControl,
+}) {
   return (
-    <View style={postsFooterStyles.wrapper}>
+    <View style={styles.wrapper}>
       <Pressable
-        style={postsFooterStyles.controlWrapper}
-        onPress={() => {
-          console.log(
-            "Footer left control. Usualy changes view to grid (but can be dispatched by name)"
-          );
-        }}
+        style={styles.controlWrapper}
+        onPress={leftControl.navigator}
       >
-        {leftControl}
+        {leftControl.icon}
       </Pressable>
 
       <OrangeButton
-        style={postsFooterStyles.button}
-        label={<Plus width={14} height={14} fill={"#ffffff"} />}
-        onPress={() => {
-          console.log(
-            "Navigate/PostEditorScreen"
-          );
-        }}
+        style={styles.button}
+        label={centralControl.icon}
+        onPress={centralControl.navigator}
       />
       <Pressable
-        style={postsFooterStyles.controlWrapper}
-        onPress={() => {
-          console.log(
-            "Footer right control. Usualy Navigate/PROFILE (but can be dispatched by name)"
-          );
-        }}
+        style={styles.controlWrapper}
+        onPress={rightControl.navigator}
       >
-        {rightControl}
+        {rightControl.icon}
       </Pressable>
     </View>
   );
-};
+}

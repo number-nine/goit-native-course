@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 
 import InputField from "../InputField/InputField";
 import OrangeButton from "../OrangeButton/OrangeButton";
 
-import commentsInputStyle from "./commentsInput.style";
+import styles from "./styles";
 import Arrow from '../../images/vector.svg'
 
 
-export default (props) => {
+export default function CommentsInput(props) {
+  const [comment, setComment] = useState("");
+  
+  const handleOnChange = ({type, payload}) => {
+    setComment(payload)
+  }
 
+  const handleSubmit = () => {
+    console.log("New comment: ", comment);
+    setComment("");
+  };
     return (
-      <View style={[commentsInputStyle.wrapper, props.style]}>
+      <View style={[styles.wrapper, props.style]}>
         <InputField
           placeholder={"Коментувати..."}
-          style={commentsInputStyle.input}
+          style={styles.input}
+          onChange={handleOnChange}
+          name="comment"
+          value={comment}
         />
-        <View style={commentsInputStyle.buttonWrapper}>
-          <OrangeButton style={commentsInputStyle.button} label={<Arrow/>} />
+        <View style={styles.buttonWrapper}>
+          <OrangeButton style={styles.button} label={<Arrow />} onPress={handleSubmit } />
         </View>
       </View>
     );

@@ -1,18 +1,21 @@
 import React from "react";
-import { Pressable, Image, View, Text } from "react-native";
+import { Image, View, Text, TouchableOpacity } from "react-native";
 
-import profileBadgeStyles from "./profileBadge.styles";
+import styles from "./styles";
 import profilePhoto from '../../images/user-badge-photo.jpg';
 
-export default (props) => {
+export default function ProfileBadge(props) {
   return (
-    <Pressable style={[profileBadgeStyles.wrapper, props.style]}>
-      <Image style={profileBadgeStyles.photo} source={profilePhoto} />
-      <View style={profileBadgeStyles.info}>
-        <Text style={[profileBadgeStyles.name]}>Natali Romanova</Text>
-        <Text style={[profileBadgeStyles.email]}>email@example.com</Text>
+    <TouchableOpacity
+      {...props}
+      style={[styles.wrapper, props.style]}
+      activeOpacity={0.6}
+    >
+      <Image style={styles.photo} source={profilePhoto} />
+      <View style={styles.info}>
+        <Text style={[styles.name]}>Natali Romanova</Text>
+        <Text style={[styles.email]}>email@example.com</Text>
       </View>
-
-    </Pressable>
+    </TouchableOpacity>
   );
 };

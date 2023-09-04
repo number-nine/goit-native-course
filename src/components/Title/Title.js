@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-import titleStyles from "./title.styles";
+import styles from "./styles";
 
-export default ({ children, ...props }) => {
+export default function Title({ children, ...props }) {
   return (
     <View>
-      <Text style={[titleStyles.text, props.style]}>{children}</Text>
+      <Text style={[styles.text, props.style]}>{children}</Text>
     </View>
   );
 };

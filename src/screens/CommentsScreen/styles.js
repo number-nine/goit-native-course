@@ -4,15 +4,22 @@ export default StyleSheet.create({
   wrapper: {
     width: "100%",
     flex: 1,
-    justifyContent: "space-between",
+    backgroundColor: "#ffffff",
   },
   main: {
-    flex: 1,
     paddingLeft: 16,
     paddingRight: 16,
   },
-  postsContainer: {
+  photo: {
+    width: "100%",
+    marginTop: 16,
+    borderRadius: 8,
+  },
+  list: {
     marginTop: 32,
-    rowGap: 32,
+  },
+  input: {
+    marginTop: 32,
+    marginBottom: 16,
   },
 });

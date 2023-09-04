@@ -1,16 +1,20 @@
 import React from "react";
-import { Pressable, Text } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
-import orangeButtonStyles from "./orangeButton.style";
+import styles from "./styles";
 
-export default ({ label, disabled, ...props }) => {
+export default function OrangeButton({ label, disabled, ...props }) {
   const isText = typeof label === "string";
 
   return (
-    <Pressable
+    <TouchableOpacity
       {...props}
+      activeOpacity={disabled ? 1 : 0.6}
       style={[
-        orangeButtonStyles.wrapper,
+        styles.wrapper,
         disabled
           ? { borderWidth: 0, backgroundColor: "#F6F6F6" }
           : { borderColor: "#FF6C00", backgroundColor: "#FF6C00" },
@@ -20,16 +24,14 @@ export default ({ label, disabled, ...props }) => {
       {isText && (
         <Text
           style={[
-            orangeButtonStyles.label,
-            disabled
-              ? { color: "#bdbdbd" }
-              : { color: "#ffffff" },
+            styles.label,
+            disabled ? { color: "#bdbdbd" } : { color: "#ffffff" },
           ]}
         >
           {label}
         </Text>
       )}
       {!isText && label}
-    </Pressable>
+    </TouchableOpacity>
   );
-};
+}

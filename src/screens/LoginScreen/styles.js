@@ -10,20 +10,18 @@ export default StyleSheet.create({
 
     paddingLeft: 16,
     paddingRight: 16,
-    paddingTop: 92,
-    paddingBottom: 45,
+    paddingTop: 32,
+    paddingBottom: 111,
 
     backgroundColor: "#ffffff",
 
     borderTopStartRadius: 25,
     borderTopEndRadius: 25,
   },
-  avatar: {
-    position: "absolute",
-    top: -60,
-    left: "50%",
-    marginLeft: -44,
+  title: {
+marginBottom:16,
   },
+
   button: {
     marginTop: 27,
   },

@@ -1,31 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from "react-native";
-import {registerRootComponent} from 'expo';
+import { registerRootComponent } from "expo";
+import { NavigationContainer } from "@react-navigation/native";
 
-import RegistrationScreen from "./screens/RegistrationScreen/RegistrationScreen";
-import LoginScreen from "./screens/LoginScreen/LoginScreen";
-import PostsScreen from "./screens/PostsScreen/PostsScreen";
-import CreatePostsScreen from "./screens/CreatePostsScreen/CreatePostsScreen";
-import CommentsScreen from "./screens/CommentsScreen/CommentsScreen";
+import MainStack from "./stacks/MainStack/MainStack";
 
- function App() {
-   return (
-     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-       <View style={styles.container}>
-         <CommentsScreen />
-
-         <StatusBar style="auto" />
-       </View>
-     </TouchableWithoutFeedback>
-   );
+function App() {
+  return (
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
+  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-});
-
-export default registerRootComponent(App)
+export default registerRootComponent(App);

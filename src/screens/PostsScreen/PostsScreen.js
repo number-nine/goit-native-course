@@ -1,33 +1,31 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import postsScreenStyles from "./postsScreen.styles";
+import styles from "./styles";
 
-import MainHeader from "../../components/MainHeader/MainHeader";
 import ProfileBadge from "../../components/ProfileBadge/ProfileBadge";
 import PostCard from "../../components/PostCard/PostCard";
-import PostsFooter from "../../components/PostsFooter/PostsFooter";
+import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
 
-import Grid from "../../images/grid.svg";
-import User from "../../images/user.svg";
-import LogOut from "../../images/log-out.svg";
 
-export default () => {
+const Tabs = createBottomTabNavigator();
+
+
+export default function PostsScreen({ navigation }) {
   return (
-    <View style={postsScreenStyles.wrapper}>
-      <MainHeader
-        title={"Публікації"}
-        rightControl={<LogOut width={24} height={24} />}
-      />
-      <ScrollView style={postsScreenStyles.main}>
-        <ProfileBadge style={{ marginTop: 32 }} />
-        <View style={postsScreenStyles.postsContainer}>
+    <ScreenLayout>
+      <ScrollView style={styles.main}>
+        <ProfileBadge
+          style={{ marginTop: 32 }}
+          onPress={() => navigation.navigate("Profile")}
+        />
+        <View style={styles.postsContainer}>
+          <PostCard />
           <PostCard />
           <PostCard />
         </View>
       </ScrollView>
-
-      <PostsFooter leftControl={<Grid />} rightControl={<User />} />
-    </View>
+    </ScreenLayout>
   );
-};
+}
