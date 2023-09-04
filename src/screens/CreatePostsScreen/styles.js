@@ -17,9 +17,7 @@ export default StyleSheet.create({
     position: "relative",
     height: 240,
     backgroundColor: "#f6f6f6",
-    borderRadius: 8,
-    borderColor: "#e8e8e8",
-    borderWidth: 1,
+
   },
   photo: {
     width: "100%",
@@ -45,14 +43,14 @@ export default StyleSheet.create({
     marginTop: 32,
   },
 
-
-  
   container: { flex: 1 },
   camera: { flex: 1 },
   photoView: {
-    flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "flex-end",
+    // flex: 1,
+    // backgroundColor: "transparent",
+    // justifyContent: "flex-end",
+    borderRadius: 8,
+    overflow: "hidden",
   },
 
   flipContainer: {

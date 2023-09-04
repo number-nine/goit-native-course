@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, TouchableOpacity } from "react-native";
+import {TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 

@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect, useRef  } from "react";
+import React, { useReducer, useState, useEffect, useRef } from "react";
 import { View, ScrollView, Image, Text, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
@@ -14,35 +14,31 @@ import OrangeButton from "../../components/OrangeButton/OrangeButton";
 
 import MapPin from "../../images/map-pin.svg";
 
+export default function CreatePostsScreen({ navigation }) {
+  const [disabled, setDisabled] = useState(true);
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraRef, setCameraRef] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        await MediaLibrary.requestPermissionsAsync();
+        setHasPermission(status === "granted");
+        console.log("permissions granted");
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
+  }, []);
 
-
-export default function CreatePostsScreen({navigation}) {
-
-    const [disabled, setDisabled] = useState(true);
-    const [hasPermission, setHasPermission] = useState(null);
-    const [cameraRef, setCameraRef] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
-
-    useEffect(() => {
-      (async () => {
-        try {
-          const { status } = await Camera.requestCameraPermissionsAsync();
-          await MediaLibrary.requestPermissionsAsync();
-          setHasPermission(status === "granted");
-          console.log('permissions granted');
-        } catch (error) {
-          console.log(error.message);
-        }
-      })();
-    }, []);
-  
-   if (hasPermission === null) {
-     return <View />;
-   }
-   if (hasPermission === false) {
-     return <Text>No access to camera</Text>;
-   }
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
 
   // function reducer(state, action) {
   //   let newState;
@@ -76,7 +72,7 @@ export default function CreatePostsScreen({navigation}) {
 
   const handleReset = () => {
     console.log("Reseting form... ");
-     navigation.navigate("HomeStack");
+    navigation.navigate("HomeStack");
     // dispatch({ type: "reset" });
   };
 
@@ -88,49 +84,21 @@ export default function CreatePostsScreen({navigation}) {
     <ScreenLayout>
       <View style={styles.wrapper}>
         <ScrollView style={styles.main}>
-          <Camera style={styles.camera} type={type} ref={setCameraRef}>
-            <View style={styles.photoView}>
-              <TouchableOpacity
-                style={styles.flipContainer}
-                onPress={() => {
-                  setType(
-                    type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back
-                  );
-                }}
-              >
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: "white" }}
-                >
-                  {" "}
-                  Flip{" "}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.button}
+          <View style={styles.photoView}>
+            <Camera style={styles.photoWrapper} type={type} ref={setCameraRef}>
+              <PhotoButton
+                style={styles.photoButton}
                 onPress={async () => {
                   if (cameraRef) {
                     const { uri } = await cameraRef.takePictureAsync();
                     await MediaLibrary.createAssetAsync(uri);
                   }
                 }}
-              >
-                <View style={styles.takePhotoOut}>
-                  <View style={styles.takePhotoInner}></View>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </Camera>
-
-          <View style={styles.photoWrapper}>
-            {/* {state.photo && <Image style={styles.photo} source={state.photo} />} */}
-            <PhotoButton
-              style={styles.photoButton}
-              onPress={handleSelectPhoto}
-              name="photo"
-            />
+                name="photo"
+              />
+            </Camera>
           </View>
+
           <Text style={styles.caption}>{"Завантажте фото"}</Text>
 
           <MinimalisticInputField
