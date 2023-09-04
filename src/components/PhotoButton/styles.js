@@ -7,6 +7,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 30,
-    backgroundColor: "#ffffff",
+    backgroundColor: "rgba(255,255,255,0.3)",
   },
 });

@@ -19,6 +19,7 @@ export default function CreatePostsScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [photoUri, setPhotoUri] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -71,8 +72,9 @@ export default function CreatePostsScreen({ navigation }) {
   };
 
   const handleReset = () => {
-    console.log("Reseting form... ");
-    navigation.navigate("HomeStack");
+    // console.log("Reseting form... ");
+    setPhotoUri(null);
+    // navigation.navigate("HomeStack");
     // dispatch({ type: "reset" });
   };
 
@@ -85,18 +87,28 @@ export default function CreatePostsScreen({ navigation }) {
       <View style={styles.wrapper}>
         <ScrollView style={styles.main}>
           <View style={styles.photoView}>
-            <Camera style={styles.photoWrapper} type={type} ref={setCameraRef}>
-              <PhotoButton
-                style={styles.photoButton}
-                onPress={async () => {
-                  if (cameraRef) {
-                    const { uri } = await cameraRef.takePictureAsync();
-                    await MediaLibrary.createAssetAsync(uri);
-                  }
-                }}
-                name="photo"
-              />
-            </Camera>
+            {!photoUri && (
+              <Camera
+                style={styles.photoWrapper}
+                type={type}
+                ref={setCameraRef}
+              >
+                <PhotoButton
+                  style={styles.photoButton}
+                  onPress={async () => {
+                    if (cameraRef) {
+                      const { uri } = await cameraRef.takePictureAsync();
+                      setPhotoUri(uri);
+                      await MediaLibrary.createAssetAsync(uri);
+                    }
+                  }}
+                  name="photo"
+                />
+              </Camera>
+            )}
+            {photoUri && (
+              <Image style={styles.photoWrapper} source={{ uri: photoUri }} />
+            )}
           </View>
 
           <Text style={styles.caption}>{"Завантажте фото"}</Text>
