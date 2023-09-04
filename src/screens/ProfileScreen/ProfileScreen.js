@@ -13,7 +13,7 @@ import PostCard from "../../components/PostCard/PostCard";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
 import OrangeButton from "../../components/OrangeButton/OrangeButton"
 
-import BackgroundSource from "../../images/credentials-bg.jpg";
+import backgroundSource from "../../images/credentials-bg.jpg";
 
 
 import LogOut from "../../images/log-out.svg";
@@ -22,9 +22,9 @@ export default function ProfileScreen({ navigation }) {
   return (
     <ScreenLayout>
       <ImageBackground
-        source={BackgroundSource}
+        source={backgroundSource}
         resizeMode="cover"
-        style={styles.back}
+        // style={styles.back}
       >
         <ScrollView style={styles.main}>
           <View style={styles.wrapper}>

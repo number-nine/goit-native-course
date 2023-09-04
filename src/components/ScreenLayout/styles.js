@@ -5,5 +5,6 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-end",
+    width: "100%",
   },
 });

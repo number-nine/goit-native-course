@@ -15,26 +15,17 @@ const Tabs = createBottomTabNavigator();
 export default function PostsScreen({ navigation }) {
   return (
     <ScreenLayout>
-        <ScrollView style={styles.main}>
-          <ProfileBadge
-            style={{ marginTop: 32 }}
-            onPress={() => navigation.navigate("Profile")}
-          />
-          <View style={styles.postsContainer}>
-            <PostCard
-              navigator={() => {
-                navigation.navigate("Comments");
-              }}
-            />
-            <PostCard
-              navigator={() => {
-                navigation.navigate("Comments");
-              }}
-            />
-          </View>
-        </ScrollView>
- </ScreenLayout>
-
-   
+      <ScrollView style={styles.main}>
+        <ProfileBadge
+          style={{ marginTop: 32 }}
+          onPress={() => navigation.navigate("Profile")}
+        />
+        <View style={styles.postsContainer}>
+          <PostCard />
+          <PostCard />
+          <PostCard />
+        </View>
+      </ScrollView>
+    </ScreenLayout>
   );
 }
