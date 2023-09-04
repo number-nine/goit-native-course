@@ -17,7 +17,7 @@ export default StyleSheet.create({
     width: "100%",
   },
   postsContainer: {
-    width:"100%",
+    width: "100%",
     rowGap: 32,
 
     paddingTop: 32,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
   avatar: {
     position: "absolute",
     top: -44,
-    left: 0,
+    // left: 0,
   },
   author: {
     marginTop: 92,
@@ -41,5 +41,3 @@ export default StyleSheet.create({
     height: 24,
   },
 });
-
-

@@ -1,20 +1,14 @@
 import React from "react";
-import {
-  View,
-  ImageBackground,
-  ScrollView,
-  Text,
-} from "react-native";
+import { View, ImageBackground, ScrollView, Text } from "react-native";
 
 import styles from "./styles";
 
 import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
 import PostCard from "../../components/PostCard/PostCard";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
-import OrangeButton from "../../components/OrangeButton/OrangeButton"
+import OrangeButton from "../../components/OrangeButton/OrangeButton";
 
 import backgroundSource from "../../images/credentials-bg.jpg";
-
 
 import LogOut from "../../images/log-out.svg";
 
