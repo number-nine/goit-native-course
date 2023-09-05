@@ -1,5 +1,5 @@
-import React, { useReducer, useState, useEffect, useRef } from "react";
-import { View, ScrollView, Image, Text, TouchableOpacity } from "react-native";
+import React, { useReducer, useState, useEffect } from "react";
+import { View, ScrollView, Image, Text } from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
@@ -19,7 +19,12 @@ function reducer(state, action) {
   let update;
   switch (action.type) {
     case "reset":
-      update = { photo: null, title: null, location: null };
+      update = {
+        photo: null,
+        title: null,
+        location: null,
+        spot: { longitude: 0, latitude: 0 },
+      };
       break;
     default:
       update = { ...state, [action.type]: action.payload };
@@ -48,6 +53,7 @@ export default function CreatePostsScreen({ navigation }) {
     photo: null,
     title: null,
     location: null,
+    spot: {longitude:0, latitude:0}
   });
 
   if (hasPermission === null) {
@@ -58,13 +64,11 @@ export default function CreatePostsScreen({ navigation }) {
   }
 
   const handleSubmit = async () => {
-    console.log(isFilled);
     if (!isFilled) return;
     const spot = await getSpot();
-    console.log(spot);
-    console.log(state);
-    // handleReset();
-    // navigation.navigate("HomeStack");
+
+    handleReset();
+    navigation.navigate("Posts");
   };
 
   const handleReset = () => {

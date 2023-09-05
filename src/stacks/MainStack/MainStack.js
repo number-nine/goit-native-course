@@ -10,6 +10,7 @@ import CommentsScreen from "../../screens/CommentsScreen/CommentsScreen";
 import HomeStack from "../HomeStack/HomeStack";
 
 import screenOptions from "../screenOptions";
+import MapScreen from "../../screens/MapScreen/MapScreen";
 
 const MainStack = createStackNavigator();
 
@@ -38,6 +39,14 @@ export default function Main() {
         options={{
           headerShown: true,
           title: "Коментарі",
+        }}
+      />
+      <MainStack.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          headerShown: true,
+          title: "Мапа",
         }}
       />
     </MainStack.Navigator>
