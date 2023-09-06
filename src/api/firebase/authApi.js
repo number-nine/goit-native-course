@@ -10,54 +10,42 @@ import { auth } from "./config";
 
 // const auth = getAuth(app);
 
-const login = async ({ username, password }) => {
-//   openLoader();
-
+const signInUser = async ({ login, password }) => {
   try {
-    await signInWithEmailAndPassword(auth, username, password);
-    // localStorage.setItem("signeduser", auth.currentUser.uid);
+    await signInWithEmailAndPassword(auth, login, password);
+    console.log("signed in");
     return auth.currentUser;
   } catch (err) {
     throw new Error(err.message);
-  } finally {
-    // closeLoader();
-  }
+  } 
 };
 
-const logout = async () => {
-//   openLoader();
+const signOutUser = async () => {
   try {
     await signOut(auth);
-    // localStorage.removeItem("signeduser");
     return auth.currentUser;
   } catch (err) {
     throw new Error(err.message);
-  } finally {
-    // closeLoader();
-  }
+  } 
 };
 
-const register = async ({ email, password, displayName }) => {
-//   openLoader();
+const registerUser = async ({ login, password, displayName }) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    // localStorage.setItem("signeduser", auth.currentUser.uid);
+    const res = await createUserWithEmailAndPassword(auth, login, password);
     await updateProfile(res.user, {
       displayName,
     });
     return auth.currentUser;
   } catch (err) {
     throw new Error(err.message);
-  } finally {
-    // closeLoader();
   }
 };
 
 export const useUserAuth = () => {
   return {
-    login,
-    logout,
-    register,
+    signInUser,
+    signOutUser,
+    registerUser,
     auth,
   };
 };

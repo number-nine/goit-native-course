@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
@@ -14,11 +14,29 @@ import Title from "../../components/Title/Title";
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
 import { useUserAuth } from '../../api/firebase/authApi';
+import { login } from "../../store/authSlice";
+
+const INITIAL_STATE = {
+  name: "myname",
+  email: "email@email.com",
+  password: "password",
+};
+
+function reducer(state, { type, payload }) {
+  switch (type) {
+    case "update":
+      return { ...state, ...payload };
+    case "clear":
+      return { ...state, ...INITIAL_STATE };
+  }
+}
+
 
 export default function RegistrationScreen({ navigation }) {
-  const { register } = useUserAuth();
-  const {name, email, password} = useSelector(state => state.auth);
-
+  const { registerUser } = useUserAuth();
+  const globalDispatch = useDispatch();
+  const [{name, email, password }, dispatch] = useReducer(reducer, INITIAL_STATE);
+  
   const properties = {
     title: "Реєстрація",
     namePlaceholder: "Ім'я",
@@ -28,17 +46,30 @@ export default function RegistrationScreen({ navigation }) {
   };
 
   const handleSubmit = async () => {
-    console.log(name, email, password);
-    const currentUser = await register({ email, password, displayName: name })
-    console.log(currentUser.uid);
+    try {
+      const currentUser = await registerUser({
+        login: email,
+        password,
+        displayName: name,
+      });
+      globalDispatch(
+        login({
+          login: currentUser.email,
+          displayName: currentUser.displayName,
+          uid: currentUser.uid,
+        })
+      );
+      dispatch({ type: "clear" });
+      navigation.navigate("HomeStack");
+    } catch (error) {
+      console.log("Something went wrong: ",error.message);
+    }
     
-    // navigation.navigate("HomeStack");
   };
 
   const handleChangeScreen = () => {
     navigation.navigate("Login");
   };
-
 
   return (
     <ScreenLayout>
@@ -53,19 +84,19 @@ export default function RegistrationScreen({ navigation }) {
             {properties.title}
           </Title>
           <InputField
-            // onChangeDispatch={dispatch}
+            onChange={dispatch}
             placeholder={properties.namePlaceholder}
             value={name}
             name="name"
           />
           <InputField
-            // onChangeDispatch={dispatch}
+            onChange={dispatch}
             placeholder={properties.emailPlaceholder}
             value={email}
             name="email"
           />
           <PasswordField
-            // onChangeDispatch={dispatch}
+            onChange={dispatch}
             value={password}
             name="password"
           />

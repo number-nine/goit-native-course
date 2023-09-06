@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
-import { useSelector } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
@@ -14,14 +12,30 @@ import Title from "../../components/Title/Title";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
-// function reducer(state, action) {
-//   return { ...state, [action.type]: action.payload };
-// }
+import { useUserAuth } from "../../api/firebase/authApi";
+import { login } from "../../store/authSlice";
+
+const INITIAL_STATE = {
+  email: null,
+  password: null,
+};
+
+function reducer(state, { type, payload }) {
+  switch (type) {
+    case "update":
+      return { ...state, ...payload };
+    case "clear":
+      return { ...state, ...INITIAL_STATE };
+  }
+}
 
 export default function LoginScreen({ navigation }) {
-  
-  const { email, password } = useSelector((state) => state.auth);
-
+  const { signInUser } = useUserAuth();
+  const globalDispatch = useDispatch();
+  const [{ email, password }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  );
 
   const properties = {
     title: "Увійти",
@@ -32,26 +46,29 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleSubmit = async () => {
-    console.log(password, email);
-    console.log('clearing store');
-    await AsyncStorage.clear();
-    // dispatch({
-    //   type: "email", payload: ""
-    // })
-    // dispatch({
-    //   type: "password", payload: ""
-    // })
-    //  navigation.navigate("HomeStack");
-  }
+     try {
+       const currentUser = await signInUser({
+         login: email,
+         password,
+       });
+       globalDispatch(
+         login({
+           login: currentUser.email,
+           displayName: currentUser.displayName,
+           uid: currentUser.uid,
+         })
+       );
+       dispatch({ type: "clear" });
+       navigation.navigate("HomeStack");
+     } catch (error) {
+       console.log("Something went wrong: ", error.message);
+     }
+  };
 
   const handleChangeScreen = () => {
     navigation.navigate("Registration");
-  }
+  };
 
-  // const [state, dispatch] = useReducer(reducer, {
-  //   email: null,
-  //   password: null,
-  // });
   return (
     <ScreenLayout>
       <ImageBackground
@@ -64,16 +81,12 @@ export default function LoginScreen({ navigation }) {
             {properties.title}
           </Title>
           <InputField
-            // onChangeDispatch={dispatch}
+            onChange={dispatch}
             placeholder={properties.emailPlaceholder}
             value={email}
             name="email"
           />
-          <PasswordField
-            // onChangeDispatch={dispatch}
-            value={password}
-            name="password"
-          />
+          <PasswordField onChange={dispatch} value={password} name="password" />
           <OrangeButton
             style={styles.button}
             label={properties.actionTitle}
@@ -88,4 +101,4 @@ export default function LoginScreen({ navigation }) {
       </ImageBackground>
     </ScreenLayout>
   );
-};
+}

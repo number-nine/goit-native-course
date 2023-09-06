@@ -1,6 +1,8 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useDispatch, useSelector } from "react-redux";
+
 
 import styles from "./styles";
 

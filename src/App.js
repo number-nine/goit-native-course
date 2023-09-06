@@ -11,9 +11,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 function App() {
-  //  await AsyncStorage.clear();
-  console.log(auth);
-  console.log(store);
+
+
   return (
     // }
     <Provider store={store}>

@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { TextInput } from "react-native";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 
-import { update } from "../../store/authSlice";
+// import { update } from "../../store/authSlice";
 
 
 
 export default function InputFields({
-  onChangeDispatch,
   placeholder,
+  name,
+  onChange,
   ...props
 }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   
   const [isFocused, setIsFocused] = useState(false);
 
   const handleOnchange = (text) => {
-    dispatch(update({ [props.name]: text }));
+    onChange({type:"update", payload: {[name]: text} });
   };
 
   const handleOnFocus = () => {
