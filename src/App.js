@@ -5,9 +5,13 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import MainStack from "./stacks/MainStack/MainStack";
 import { store, persistor } from "./store/store";
-import { auth } from "../src/db/firebase/config";
+import { auth } from "./api/firebase/config";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 function App() {
+  //  await AsyncStorage.clear();
   console.log(auth);
   console.log(store);
   return (

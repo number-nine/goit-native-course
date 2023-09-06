@@ -1,5 +1,8 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { View, ImageBackground } from "react-native";
+import { useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 import styles from "./styles";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
@@ -11,11 +14,15 @@ import Title from "../../components/Title/Title";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
-function reducer(state, action) {
-  return { ...state, [action.type]: action.payload };
-}
+// function reducer(state, action) {
+//   return { ...state, [action.type]: action.payload };
+// }
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
+  
+  const { email, password } = useSelector((state) => state.auth);
+
+
   const properties = {
     title: "Увійти",
     namePlaceholder: "Ім'я",
@@ -24,25 +31,27 @@ export default function LoginScreen({navigation}) {
     switchAction: ["Немає акаунту? ", "Зареєструватися"],
   };
 
-  const handleSubmit = () => {
-    console.log(state);
-    dispatch({
-      type: "email", payload: ""
-    })
-    dispatch({
-      type: "password", payload: ""
-    })
-     navigation.navigate("HomeStack");
+  const handleSubmit = async () => {
+    console.log(password, email);
+    console.log('clearing store');
+    await AsyncStorage.clear();
+    // dispatch({
+    //   type: "email", payload: ""
+    // })
+    // dispatch({
+    //   type: "password", payload: ""
+    // })
+    //  navigation.navigate("HomeStack");
   }
 
   const handleChangeScreen = () => {
     navigation.navigate("Registration");
   }
 
-  const [state, dispatch] = useReducer(reducer, {
-    email: null,
-    password: null,
-  });
+  // const [state, dispatch] = useReducer(reducer, {
+  //   email: null,
+  //   password: null,
+  // });
   return (
     <ScreenLayout>
       <ImageBackground
@@ -55,14 +64,14 @@ export default function LoginScreen({navigation}) {
             {properties.title}
           </Title>
           <InputField
-            onChangeDispatch={dispatch}
+            // onChangeDispatch={dispatch}
             placeholder={properties.emailPlaceholder}
-            value={state.email}
+            value={email}
             name="email"
           />
           <PasswordField
-            onChangeDispatch={dispatch}
-            value={state.password}
+            // onChangeDispatch={dispatch}
+            value={password}
             name="password"
           />
           <OrangeButton

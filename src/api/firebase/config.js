@@ -14,8 +14,8 @@ const firebaseConfig = {
   databaseURL: "https://goit-native-course.firebaseio.com",
   projectId: "goit-native-course",
   storageBucket: "goit-native-course.appspot.com",
-    messagingSenderId: "405681544771",
-    appId: "1:405681544771:web:240761a0a1d03472933ef6",
+  messagingSenderId: "405681544771",
+  appId: "1:405681544771:web:240761a0a1d03472933ef6",
   //   measurementId: "G-measurement-id",
 };
 
