@@ -3,6 +3,7 @@ import { View, ScrollView, Image, Text } from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
+import { useFireStore } from "../../api/firebase/firestoreApi";
 
 import styles from "./styles";
 
@@ -14,23 +15,40 @@ import MinimalisticInputField from "../../components/MinimalisticInputField/Mini
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
 
 import MapPin from "../../images/map-pin.svg";
+import { useSelector } from "react-redux";
 
-function reducer(state, action) {
-  let update;
-  switch (action.type) {
-    case "reset":
-      update = {
-        photo: null,
-        title: null,
-        location: null,
-        spot: { longitude: 0, latitude: 0 },
-      };
-      break;
-    default:
-      update = { ...state, [action.type]: action.payload };
+const INITIAL_STATE = {
+  photo: null,
+  title: null,
+  location: null,
+  spot: { longitude: 0, latitude: 0 },
+};
+
+function reducer(state, { type, payload }) {
+  switch (type) {
+    case "update":
+      return { ...state, ...payload };
+    case "clear":
+      return { ...state, ...INITIAL_STATE };
   }
-  return update;
 }
+
+// function reducer(state, action) {
+//   let update;
+//   switch (action.type) {
+//     case "reset":
+//       update = {
+//         photo: null,
+//         title: null,
+//         location: null,
+//         spot: { longitude: 0, latitude: 0 },
+//       };
+//       break;
+//     default:
+//       update = { ...state, [action.type]: action.payload };
+//   }
+//   return update;
+// }
 
 export default function CreatePostsScreen({ navigation }) {
   useEffect(() => {
@@ -49,12 +67,9 @@ export default function CreatePostsScreen({ navigation }) {
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
-  const [state, dispatch] = useReducer(reducer, {
-    photo: null,
-    title: null,
-    location: null,
-    spot: {longitude:0, latitude:0}
-  });
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const uid = useSelector(state => state.auth.uid)
+  const { add } = useFireStore();
 
   if (hasPermission === null) {
     return <View />;
@@ -65,14 +80,20 @@ export default function CreatePostsScreen({ navigation }) {
 
   const handleSubmit = async () => {
     if (!isFilled) return;
-    const spot = await getSpot();
-
-    handleReset();
-    navigation.navigate("Posts");
+    try {
+      const spot = await getSpot();
+      dispatch({ type: "update", payload: { spot } });
+      await add(uid, state);
+      handleReset();
+      navigation.navigate("Posts");
+    } catch (error) {
+      console.log("Something went wrong: ", error.message);
+    }
+    
   };
 
   const handleReset = () => {
-    dispatch({ type: "reset" });
+    dispatch({ type: "clear" });
   };
 
   const getSpot = async () => {
@@ -80,7 +101,6 @@ export default function CreatePostsScreen({ navigation }) {
       let { status } = await Location.requestBackgroundPermissionsAsync();
       if (status !== "granted") {
         throw new Error("Permission to access location was denied");
-        
       }
       let location = await Location.getCurrentPositionAsync({});
       return {
@@ -94,10 +114,9 @@ export default function CreatePostsScreen({ navigation }) {
         longitude: 0,
       };
     }
-    
-  }
+  };
 
-const {photo, title, location } = state
+  const { photo, title, location } = state;
   const isFilled = photo && title && location;
 
   return (
@@ -116,8 +135,8 @@ const {photo, title, location } = state
                   onPress={async () => {
                     if (cameraRef) {
                       const { uri } = await cameraRef.takePictureAsync();
-                      dispatch({ type: "photo", payload: uri });
                       await MediaLibrary.createAssetAsync(uri);
+                      dispatch({ type: "update", payload: { photo: uri } });
                     }
                   }}
                   name="photo"
@@ -137,15 +156,15 @@ const {photo, title, location } = state
             placeholder={"Назва..."}
             style={styles.title}
             value={state.title}
-            onChangeDispatch={dispatch}
+            onChange={dispatch}
             name="title"
           />
           <MinimalisticInputField
             placeholder={"Місцевість..."}
             icon={<MapPin />}
             style={styles.location}
-            value={state.loaction}
-            onChangeDispatch={dispatch}
+            value={state.location}
+            onChange={dispatch}
             name="location"
           />
           <OrangeButton
