@@ -1,6 +1,5 @@
 import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
-import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
@@ -13,6 +12,7 @@ import Title from "../../components/Title/Title";
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
 import { useUserAuth } from "../../api/firebase/authApi";
+import { useDispatch } from "react-redux";
 import { login } from "../../store/authSlice";
 
 const INITIAL_STATE = {
@@ -47,19 +47,18 @@ export default function LoginScreen({ navigation }) {
 
   const handleSubmit = async () => {
      try {
-       const currentUser = await signInUser({
+       const user = await signInUser({
          login: email,
          password,
        });
        globalDispatch(
          login({
-           login: currentUser.email,
-           displayName: currentUser.displayName,
-           uid: currentUser.uid,
+           login: user.email,
+           displayName: user.displayName,
+           uid: user.uid,
          })
        );
        dispatch({ type: "clear" });
-       navigation.navigate("HomeStack");
      } catch (error) {
        console.log("Something went wrong: ", error.message);
      }

@@ -1,5 +1,7 @@
 import React from "react";
 import { View, ImageBackground, ScrollView, Text } from "react-native";
+import { useSelector } from "react-redux";
+import { useUserAuth } from "../../api/firebase/authApi";
 
 import styles from "./styles";
 
@@ -12,7 +14,12 @@ import backgroundSource from "../../images/credentials-bg.jpg";
 
 import LogOut from "../../images/log-out.svg";
 
+
+
 export default function ProfileScreen({ navigation }) {
+  const displayName = useSelector((state) => state.auth.displayName);
+  const { signOutUser } = useUserAuth();
+
   return (
     <ScreenLayout>
       <ImageBackground
@@ -29,10 +36,17 @@ export default function ProfileScreen({ navigation }) {
                 styles.logout,
                 { backgroundColor: "#ffffff", borderColor: "#ffffff" },
               ]}
-              onPress={() => navigation.navigate("Login")}
+              onPress={async () => {
+                try {
+                  await signOutUser();
+                } catch (error) {
+                  console.log("Something went wrong ", error.message);
+                }
+                
+              }}
             />
             <Text style={[styles.author, { fontWeight: 500 }]}>
-              Natali Romanova
+              {displayName}
             </Text>
 
             <View style={styles.postsContainer}>

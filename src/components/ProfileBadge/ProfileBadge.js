@@ -6,7 +6,7 @@ import profilePhoto from '../../images/user-badge-photo.jpg';
 import { useSelector } from "react-redux";
 
 export default function ProfileBadge(props) {
-  const { login, displayName } = useSelector(state => { console.log(state);return state.auth })
+  const { login, displayName } = useSelector(state => state.auth)
   return (
     <TouchableOpacity
       {...props}

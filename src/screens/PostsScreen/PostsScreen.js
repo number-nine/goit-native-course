@@ -1,7 +1,5 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useDispatch, useSelector } from "react-redux";
 
 
 import styles from "./styles";
@@ -9,10 +7,6 @@ import styles from "./styles";
 import ProfileBadge from "../../components/ProfileBadge/ProfileBadge";
 import PostCard from "../../components/PostCard/PostCard";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
-
-
-const Tabs = createBottomTabNavigator();
-
 
 export default function PostsScreen({ navigation }) {
   return (

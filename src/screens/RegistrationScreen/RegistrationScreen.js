@@ -1,6 +1,5 @@
 import React, { useReducer } from "react";
 import { View, ImageBackground } from "react-native";
-import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import ScreenLayout from "../../components/ScreenLayout/ScreenLayout";
@@ -13,7 +12,8 @@ import Title from "../../components/Title/Title";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
-import { useUserAuth } from '../../api/firebase/authApi';
+import { useUserAuth } from "../../api/firebase/authApi";
+import { useDispatch } from "react-redux";
 import { login } from "../../store/authSlice";
 
 const INITIAL_STATE = {
@@ -31,12 +31,15 @@ function reducer(state, { type, payload }) {
   }
 }
 
-
 export default function RegistrationScreen({ navigation }) {
   const { registerUser } = useUserAuth();
-  const globalDispatch = useDispatch();
-  const [{name, email, password }, dispatch] = useReducer(reducer, INITIAL_STATE);
-  
+    const globalDispatch = useDispatch();
+
+  const [{ name, email, password }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  );
+
   const properties = {
     title: "Реєстрація",
     namePlaceholder: "Ім'я",
@@ -47,24 +50,22 @@ export default function RegistrationScreen({ navigation }) {
 
   const handleSubmit = async () => {
     try {
-      const currentUser = await registerUser({
+      const user = await registerUser({
         login: email,
         password,
         displayName: name,
       });
-      globalDispatch(
-        login({
-          login: currentUser.email,
-          displayName: currentUser.displayName,
-          uid: currentUser.uid,
-        })
-      );
+       globalDispatch(
+         login({
+           login: user.email,
+           displayName: user.displayName,
+           uid: user.uid,
+         })
+       );
       dispatch({ type: "clear" });
-      navigation.navigate("HomeStack");
     } catch (error) {
-      console.log("Something went wrong: ",error.message);
+      console.log("Something went wrong: ", error.message);
     }
-    
   };
 
   const handleChangeScreen = () => {
@@ -95,11 +96,7 @@ export default function RegistrationScreen({ navigation }) {
             value={email}
             name="email"
           />
-          <PasswordField
-            onChange={dispatch}
-            value={password}
-            name="password"
-          />
+          <PasswordField onChange={dispatch} value={password} name="password" />
           <OrangeButton
             style={styles.button}
             label={properties.actionTitle}

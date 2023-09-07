@@ -1,23 +1,18 @@
 import {
   createUserWithEmailAndPassword,
-//   getAuth,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./config";
-// import { openLoader, closeLoader } from "../../loader/loader";
-
-// const auth = getAuth(app);
 
 const signInUser = async ({ login, password }) => {
   try {
     await signInWithEmailAndPassword(auth, login, password);
-    console.log("signed in");
     return auth.currentUser;
   } catch (err) {
     throw new Error(err.message);
-  } 
+  }
 };
 
 const signOutUser = async () => {
@@ -26,7 +21,7 @@ const signOutUser = async () => {
     return auth.currentUser;
   } catch (err) {
     throw new Error(err.message);
-  } 
+  }
 };
 
 const registerUser = async ({ login, password, displayName }) => {

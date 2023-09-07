@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useUserAuth } from "../../api/firebase/authApi";
+import { logout } from "../../store/authSlice";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -16,6 +19,8 @@ import TabBar from "../../components/TabBar/TabBar";
 const Tabs = createBottomTabNavigator();
 
 export default function HomeStack({ navigation }) {
+  const globalDispatch = useDispatch();
+  const { signOutUser } = useUserAuth();
   return (
     <Tabs.Navigator
       tabBar={(props) => TabBar(props)}
@@ -37,7 +42,15 @@ export default function HomeStack({ navigation }) {
                 styles.footerButton,
                 { backgroundColor: "#ffffff", borderColor: "#ffffff" },
               ]}
-              onPress={() => navigation.navigate("Login")}
+              onPress={async () => {
+                try {
+                  await signOutUser();
+                  globalDispatch(logout());
+                  navigation.navigate("Login");
+                } catch (error) {
+                  console.log("Something went wrong ", error.message);
+                }
+              }}
             />
           ),
         }}
