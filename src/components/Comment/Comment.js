@@ -3,7 +3,7 @@ import { Image, View, Text } from "react-native";
 
 import styles from "./styles";
 
-export default function Comment({ even = false }) {
+export default function Comment({ even = false, text }) {
   return (
     <View
       style={[
@@ -26,8 +26,7 @@ export default function Comment({ even = false }) {
         ]}
       >
         <Text style={styles.text}>
-          Really love your most recent photo. I’ve been trying to capture the
-          same thing for a few months and would love some tips!
+          {text}
         </Text>
         <Text style={styles.date}>09 червня, 2020 | 08:40</Text>
       </View>

@@ -33,22 +33,6 @@ function reducer(state, { type, payload }) {
   }
 }
 
-// function reducer(state, action) {
-//   let update;
-//   switch (action.type) {
-//     case "reset":
-//       update = {
-//         photo: null,
-//         title: null,
-//         location: null,
-//         spot: { longitude: 0, latitude: 0 },
-//       };
-//       break;
-//     default:
-//       update = { ...state, [action.type]: action.payload };
-//   }
-//   return update;
-// }
 
 export default function CreatePostsScreen({ navigation }) {
   useEffect(() => {
@@ -69,7 +53,7 @@ export default function CreatePostsScreen({ navigation }) {
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const uid = useSelector(state => state.auth.uid)
-  const { add } = useFireStore();
+  const { addPost } = useFireStore();
 
   if (hasPermission === null) {
     return <View />;
@@ -83,7 +67,7 @@ export default function CreatePostsScreen({ navigation }) {
     try {
       const spot = await getSpot();
       dispatch({ type: "update", payload: { spot } });
-      await add(uid, state);
+      await addPost(uid, state);
       handleReset();
       navigation.navigate("Posts");
     } catch (error) {

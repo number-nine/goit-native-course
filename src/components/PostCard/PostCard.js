@@ -10,7 +10,7 @@ import MessageCircle from "../../images/message-circle.svg";
 import MapPin from "../../images/map-pin.svg";
 import Like from "../../images/thumbs-up.svg";
 
-export default function PostCard() {
+export default function PostCard({ location, title, id}) {
   const navigation = useNavigation();
 
   const description = {
@@ -26,14 +26,14 @@ export default function PostCard() {
         source={require("../../images/post-foto.jpg")}
         style={styles.photo}
       />
-      <Title style={styles.title}>{description.title}</Title>
+      <Title style={styles.title}>{title}</Title>
       <View style={styles.details}>
         <View style={styles.statistic}>
           <TouchableOpacity
             style={styles.detailsItem}
             activeOpacity={0.6}
             onPress={() => {
-              navigation.navigate("Comments");
+              navigation.navigate("Comments", {id});
             }}
           >
             <MessageCircle />
@@ -59,7 +59,7 @@ export default function PostCard() {
         >
           <MapPin />
           <Text style={styles.detailsCaption}>
-            {description.location}
+            {location}
           </Text>
         </TouchableOpacity>
       </View>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, ImageBackground, ScrollView, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { useUserAuth } from "../../api/firebase/authApi";
+import { useFireStore } from "../../api/firebase/firestoreApi";
+import { useIsFocused } from "@react-navigation/native";
 
 import styles from "./styles";
 
@@ -14,18 +16,31 @@ import backgroundSource from "../../images/credentials-bg.jpg";
 
 import LogOut from "../../images/log-out.svg";
 
-
-
 export default function ProfileScreen({ navigation }) {
   const displayName = useSelector((state) => state.auth.displayName);
+  const uid = useSelector((state) => state.auth.uid);
   const { signOutUser } = useUserAuth();
+  const { getPostsByUserId } = useFireStore();
+  const [posts, setPosts] = useState([]);
+  const isFocused = useIsFocused();
+
+  useEffect(
+    (isFocused) => {
+      async function fetchData() {
+        const data = await getPostsByUserId(uid);
+        setPosts(data);
+      }
+      fetchData();
+    },
+    [isFocused]
+  );
 
   return (
     <ScreenLayout>
       <ImageBackground
         source={backgroundSource}
         resizeMode="cover"
-        // style={styles.back}
+        style={{ width: "100%", flex:1 }}
       >
         <ScrollView style={styles.main}>
           <View style={styles.wrapper}>
@@ -42,7 +57,6 @@ export default function ProfileScreen({ navigation }) {
                 } catch (error) {
                   console.log("Something went wrong ", error.message);
                 }
-                
               }}
             />
             <Text style={[styles.author, { fontWeight: 500 }]}>
@@ -50,9 +64,9 @@ export default function ProfileScreen({ navigation }) {
             </Text>
 
             <View style={styles.postsContainer}>
-              <PostCard />
-              <PostCard />
-              <PostCard />
+              {posts.map((post) => (
+                <PostCard key={post.id} {...post} />
+              ))}
             </View>
           </View>
         </ScrollView>
