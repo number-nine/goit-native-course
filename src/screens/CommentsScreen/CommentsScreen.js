@@ -29,7 +29,7 @@ export default function CommentsScreen({
       }
       fetchData();
     },
-    [isFocused]
+    [isFocused, flag]
   );
 
   return (

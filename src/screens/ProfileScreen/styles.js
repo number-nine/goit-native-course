@@ -3,8 +3,6 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   wrapper: {
     position: "relative",
-
-    // justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     paddingLeft: 16,
@@ -13,15 +11,10 @@ export default StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     marginTop: 150,
-
-    // height:"100%",
-
-    // borderColor: "red",
-    // borderWidth: 2,
+    minHeight:750,
   },
   main: {
     width: "100%",
-    height: "100%",
   },
   postsContainer: {
     width: "100%",

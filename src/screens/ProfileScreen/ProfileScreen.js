@@ -40,7 +40,11 @@ export default function ProfileScreen({ navigation }) {
       <ImageBackground
         source={backgroundSource}
         resizeMode="cover"
-        style={{ width: "100%", flex:1 }}
+        style={{
+          width: "100%",
+          flex:1,
+
+        }}
       >
         <ScrollView style={styles.main}>
           <View style={styles.wrapper}>
