@@ -56,6 +56,7 @@ export default function LoginScreen({ navigation }) {
            login: user.email,
            displayName: user.displayName,
            uid: user.uid,
+           photoURL: user.photoURL,
          })
        );
        dispatch({ type: "clear" });

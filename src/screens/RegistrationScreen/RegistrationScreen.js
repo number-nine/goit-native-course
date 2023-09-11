@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { View, ImageBackground } from "react-native";
 
 import styles from "./styles";
@@ -9,6 +9,7 @@ import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import CredentialsLink from "../../components/CredentialsLink/CredentialsLink";
 import Title from "../../components/Title/Title";
+// import avatarMock from "../../images/default-avatar.png";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
@@ -20,6 +21,7 @@ const INITIAL_STATE = {
   name: "myname",
   email: "email@email.com",
   password: "password",
+  avatarUri: null,
 };
 
 function reducer(state, { type, payload }) {
@@ -33,9 +35,9 @@ function reducer(state, { type, payload }) {
 
 export default function RegistrationScreen({ navigation }) {
   const { registerUser } = useUserAuth();
-    const globalDispatch = useDispatch();
+  const globalDispatch = useDispatch();
 
-  const [{ name, email, password }, dispatch] = useReducer(
+  const [{ name, email, password, avatarUri }, dispatch] = useReducer(
     reducer,
     INITIAL_STATE
   );
@@ -54,12 +56,14 @@ export default function RegistrationScreen({ navigation }) {
         login: email,
         password,
         displayName: name,
+        photoURL: avatarUri,
       });
        globalDispatch(
          login({
            login: user.email,
            displayName: user.displayName,
            uid: user.uid,
+           avatarUri: user.photoURL,
          })
        );
       dispatch({ type: "clear" });
@@ -80,7 +84,11 @@ export default function RegistrationScreen({ navigation }) {
         style={styles.back}
       >
         <View style={styles.wrapper}>
-          <AvatarHolder style={styles.avatar} />
+          <AvatarHolder
+            style={styles.avatar}
+            avatar={{ uri: avatarUri }}
+            onAvatarSelect={dispatch}
+          />
           <Title style={[styles.title, { fontSize: 30, fontWeight: 500 }]}>
             {properties.title}
           </Title>

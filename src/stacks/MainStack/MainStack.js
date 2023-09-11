@@ -15,7 +15,7 @@ import HomeStack from "../HomeStack/HomeStack";
 
 import screenOptions from "../screenOptions";
 import MapScreen from "../../screens/MapScreen/MapScreen";
-import { logout } from "../../store/authSlice";
+import { logout, login } from "../../store/authSlice";
 import { useNavigation } from "@react-navigation/native";
 
 const MainStack = createStackNavigator();
@@ -35,6 +35,15 @@ export default function Main() {
       dispatch(logout());
       return;
     }
+    //  console.log(user);
+    dispatch(
+      login({
+        login: user.email,
+        displayName: user.displayName,
+        uid: user.uid,
+        avatarUri: user.photoURL,
+      })
+    );
   }
 
   return (

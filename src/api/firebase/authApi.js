@@ -24,12 +24,15 @@ const signOutUser = async () => {
   }
 };
 
-const registerUser = async ({ login, password, displayName }) => {
+const registerUser = async ({ login, password, displayName, photoURL }) => {
+  // console.log(avatar);
   try {
     const res = await createUserWithEmailAndPassword(auth, login, password);
     await updateProfile(res.user, {
       displayName,
+      photoURL,
     });
+    // console.log(auth.currentUser);
     return auth.currentUser;
   } catch (err) {
     throw new Error(err.message);

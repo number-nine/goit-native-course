@@ -19,6 +19,7 @@ import LogOut from "../../images/log-out.svg";
 export default function ProfileScreen({ navigation }) {
   const displayName = useSelector((state) => state.auth.displayName);
   const uid = useSelector((state) => state.auth.uid);
+  const avatarUri = useSelector((state) => state.auth.avatarUri);
   const { signOutUser } = useUserAuth();
   const { getPostsByUserId } = useFireStore();
   const [posts, setPosts] = useState([]);
@@ -42,13 +43,12 @@ export default function ProfileScreen({ navigation }) {
         resizeMode="cover"
         style={{
           width: "100%",
-          flex:1,
-
+          flex: 1,
         }}
       >
         <ScrollView style={styles.main}>
           <View style={styles.wrapper}>
-            <AvatarHolder style={styles.avatar} />
+            <AvatarHolder style={styles.avatar} avatar={{ uri: avatarUri }} />
             <OrangeButton
               label={<LogOut />}
               style={[
