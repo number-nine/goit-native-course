@@ -5,8 +5,8 @@ import { PersistGate } from "redux-persist/integration/react";
 
 
 
-import MainStack from "./stacks/MainStack/MainStack";
-import { store, persistor } from "./store/store";
+import MainStack from "./src/stacks/MainStack/MainStack";
+import { store, persistor } from "./src/store/store";
 
 
 
@@ -26,4 +26,6 @@ function App() {
   );
 }
 
-export default registerRootComponent(App);
+export default App;
+
+// export default registerRootComponent(App);

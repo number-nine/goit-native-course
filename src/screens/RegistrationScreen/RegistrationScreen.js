@@ -9,7 +9,7 @@ import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import CredentialsLink from "../../components/CredentialsLink/CredentialsLink";
 import Title from "../../components/Title/Title";
-// import avatarMock from "../../images/default-avatar.png";
+import avatarMock from "../../images/default-avatar.png";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
@@ -75,6 +75,9 @@ export default function RegistrationScreen({ navigation }) {
   const handleChangeScreen = () => {
     navigation.navigate("Login");
   };
+  let avatarImg;
+  if (!avatarUri) { avatarImg = avatarMock }
+  else {avatarImg = {uri: avatarUri}}
 
   return (
     <ScreenLayout>
@@ -86,7 +89,7 @@ export default function RegistrationScreen({ navigation }) {
         <View style={styles.wrapper}>
           <AvatarHolder
             style={styles.avatar}
-            avatar={{ uri: avatarUri }}
+            avatar={avatarImg}
             onAvatarSelect={dispatch}
           />
           <Title style={[styles.title, { fontSize: 30, fontWeight: 500 }]}>
