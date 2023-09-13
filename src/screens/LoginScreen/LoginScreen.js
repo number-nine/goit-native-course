@@ -11,11 +11,32 @@ import Title from "../../components/Title/Title";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
-function reducer(state, action) {
-  return { ...state, [action.type]: action.payload };
+import { useUserAuth } from "../../api/firebase/authApi";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/authSlice";
+
+const INITIAL_STATE = {
+  email: null,
+  password: null,
+};
+
+function reducer(state, { type, payload }) {
+  switch (type) {
+    case "update":
+      return { ...state, ...payload };
+    case "clear":
+      return { ...state, ...INITIAL_STATE };
+  }
 }
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
+  const { signInUser } = useUserAuth();
+  const globalDispatch = useDispatch();
+  const [{ email, password }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  );
+
   const properties = {
     title: "Увійти",
     namePlaceholder: "Ім'я",
@@ -24,25 +45,29 @@ export default function LoginScreen({navigation}) {
     switchAction: ["Немає акаунту? ", "Зареєструватися"],
   };
 
-  const handleSubmit = () => {
-    console.log(state);
-    dispatch({
-      type: "email", payload: ""
-    })
-    dispatch({
-      type: "password", payload: ""
-    })
-     navigation.navigate("HomeStack");
-  }
+  const handleSubmit = async () => {
+     try {
+       const user = await signInUser({
+         login: email,
+         password,
+       });
+       globalDispatch(
+         login({
+           login: user.email,
+           displayName: user.displayName,
+           uid: user.uid,
+           photoURL: user.photoURL,
+         })
+       );
+       dispatch({ type: "clear" });
+     } catch (error) {
+       console.log("Something went wrong: ", error.message);
+     }
+  };
 
   const handleChangeScreen = () => {
     navigation.navigate("Registration");
-  }
-
-  const [state, dispatch] = useReducer(reducer, {
-    email: "",
-    password: "",
-  });
+  };
 
   return (
     <ScreenLayout>
@@ -58,14 +83,10 @@ export default function LoginScreen({navigation}) {
           <InputField
             onChange={dispatch}
             placeholder={properties.emailPlaceholder}
-            value={state.email}
+            value={email}
             name="email"
           />
-          <PasswordField
-            onChange={dispatch}
-            value={state.password}
-            name="password"
-          />
+          <PasswordField onChange={dispatch} value={password} name="password" />
           <OrangeButton
             style={styles.button}
             label={properties.actionTitle}
@@ -80,4 +101,4 @@ export default function LoginScreen({navigation}) {
       </ImageBackground>
     </ScreenLayout>
   );
-};
+}

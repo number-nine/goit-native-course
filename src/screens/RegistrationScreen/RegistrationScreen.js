@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { View, ImageBackground } from "react-native";
 
 import styles from "./styles";
@@ -9,14 +9,39 @@ import AvatarHolder from "../../components/AvatarHolder/AvatarHolder";
 import OrangeButton from "../../components/OrangeButton/OrangeButton";
 import CredentialsLink from "../../components/CredentialsLink/CredentialsLink";
 import Title from "../../components/Title/Title";
+// import avatarMock from "../../images/default-avatar.png";
 
 import BackgroundSource from "../../images/credentials-bg.jpg";
 
-function reducer(state, action) {
-  return { ...state, [action.type]: action.payload };
+import { useUserAuth } from "../../api/firebase/authApi";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/authSlice";
+
+const INITIAL_STATE = {
+  name: "myname",
+  email: "email@email.com",
+  password: "password",
+  avatarUri: null,
+};
+
+function reducer(state, { type, payload }) {
+  switch (type) {
+    case "update":
+      return { ...state, ...payload };
+    case "clear":
+      return { ...state, ...INITIAL_STATE };
+  }
 }
 
 export default function RegistrationScreen({ navigation }) {
+  const { registerUser } = useUserAuth();
+  const globalDispatch = useDispatch();
+
+  const [{ name, email, password, avatarUri }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  );
+
   const properties = {
     title: "Реєстрація",
     namePlaceholder: "Ім'я",
@@ -25,32 +50,31 @@ export default function RegistrationScreen({ navigation }) {
     switchAction: ["Вже є акаунт? ", "Увійти"],
   };
 
-  const handleSubmit = () => {
-    console.log(state);
-    dispatch({
-      type: "name",
-      payload: "",
-    });
-    dispatch({
-      type: "email",
-      payload: "",
-    });
-    dispatch({
-      type: "password",
-      payload: "",
-    });
-    navigation.navigate("HomeStack");
+  const handleSubmit = async () => {
+    try {
+      const user = await registerUser({
+        login: email,
+        password,
+        displayName: name,
+        photoURL: avatarUri,
+      });
+       globalDispatch(
+         login({
+           login: user.email,
+           displayName: user.displayName,
+           uid: user.uid,
+           avatarUri: user.photoURL,
+         })
+       );
+      dispatch({ type: "clear" });
+    } catch (error) {
+      console.log("Something went wrong: ", error.message);
+    }
   };
 
   const handleChangeScreen = () => {
     navigation.navigate("Login");
   };
-
-  const [state, dispatch] = useReducer(reducer, {
-    name: "",
-    email: "",
-    password: "",
-  });
 
   return (
     <ScreenLayout>
@@ -60,27 +84,27 @@ export default function RegistrationScreen({ navigation }) {
         style={styles.back}
       >
         <View style={styles.wrapper}>
-          <AvatarHolder style={styles.avatar} />
+          <AvatarHolder
+            style={styles.avatar}
+            avatar={{ uri: avatarUri }}
+            onAvatarSelect={dispatch}
+          />
           <Title style={[styles.title, { fontSize: 30, fontWeight: 500 }]}>
             {properties.title}
           </Title>
           <InputField
             onChange={dispatch}
             placeholder={properties.namePlaceholder}
-            value={state.name}
+            value={name}
             name="name"
           />
           <InputField
             onChange={dispatch}
             placeholder={properties.emailPlaceholder}
-            value={state.email}
+            value={email}
             name="email"
           />
-          <PasswordField
-            onChange={dispatch}
-            value={state.password}
-            name="password"
-          />
+          <PasswordField onChange={dispatch} value={password} name="password" />
           <OrangeButton
             style={styles.button}
             label={properties.actionTitle}
